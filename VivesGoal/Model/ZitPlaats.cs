@@ -12,22 +12,24 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Stadion
+    public partial class ZitPlaats
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Stadion()
+        public ZitPlaats()
         {
-            this.Club = new HashSet<Club>();
-            this.ZitPlaats = new HashSet<ZitPlaats>();
+            this.Abonnement = new HashSet<Abonnement>();
+            this.Boeking = new HashSet<Boeking>();
         }
     
         public int id { get; set; }
-        public string naam { get; set; }
-        public string adres { get; set; }
+        public int vak_id { get; set; }
+        public int stadion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Club> Club { get; set; }
+        public virtual ICollection<Abonnement> Abonnement { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZitPlaats> ZitPlaats { get; set; }
+        public virtual ICollection<Boeking> Boeking { get; set; }
+        public virtual Stadion Stadion1 { get; set; }
+        public virtual Vak Vak { get; set; }
     }
 }

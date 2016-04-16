@@ -1,0 +1,650 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VoetbalClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="klant" />
+            <PropertyRef Name="zitplaats" />
+            <PropertyRef Name="club" />
+          </Key>
+          <Property Name="klant" Type="int" Nullable="false" />
+          <Property Name="zitplaats" Type="int" Nullable="false" />
+          <Property Name="club" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Boeking">
+          <Key>
+            <PropertyRef Name="klant" />
+            <PropertyRef Name="zitplaats" />
+            <PropertyRef Name="Wedstrijd" />
+          </Key>
+          <Property Name="klant" Type="int" Nullable="false" />
+          <Property Name="zitplaats" Type="int" Nullable="false" />
+          <Property Name="Wedstrijd" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stadion id" Type="int" Nullable="false" />
+          <Property Name="naam" Type="varchar" MaxLength="30" />
+          <Property Name="logo" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Klant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="voornaam" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="naam" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="adres" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Stadion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naam" Type="varchar" MaxLength="255" />
+          <Property Name="adres" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Vak">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naam" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Wedstrijd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="datum" Type="date" Nullable="false" />
+          <Property Name="thuisploeg" Type="int" Nullable="false" />
+          <Property Name="bezoekers" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZitPlaats">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vak id" Type="int" Nullable="false" />
+          <Property Name="stadion" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="Abonnement heeft als club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="club" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Abonnement heeft als zitplaats">
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZitPlaats">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="zitplaats" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bezoekers">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Wedstrijd">
+              <PropertyRef Name="bezoekers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Boeking behoort tot wedstrijd">
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="1" />
+          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wedstrijd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boeking">
+              <PropertyRef Name="Wedstrijd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="boeking heeft als zitplaats">
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="1" />
+          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZitPlaats">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boeking">
+              <PropertyRef Name="zitplaats" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="club behoort tot stadion">
+          <End Role="Stadion" Type="Self.Stadion" Multiplicity="1" />
+          <End Role="Club" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stadion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="stadion id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKZitPlaats951413">
+          <End Role="Stadion" Type="Self.Stadion" Multiplicity="1" />
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stadion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ZitPlaats">
+              <PropertyRef Name="stadion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="klant heeft abonnement">
+          <End Role="Klant" Type="Self.Klant" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klant">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="klant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="klant maakt boeking">
+          <End Role="Klant" Type="Self.Klant" Multiplicity="1" />
+          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klant">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boeking">
+              <PropertyRef Name="klant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thuisploeg">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Wedstrijd">
+              <PropertyRef Name="thuisploeg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vak behoort tot zitplaats">
+          <End Role="Vak" Type="Self.Vak" Multiplicity="1" />
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vak">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ZitPlaats">
+              <PropertyRef Name="vak id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VoetbalClubModelStoreContainer">
+          <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boeking" EntityType="Self.Boeking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klant" EntityType="Self.Klant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stadion" EntityType="Self.Stadion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vak" EntityType="Self.Vak" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wedstrijd" EntityType="Self.Wedstrijd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZitPlaats" EntityType="Self.ZitPlaats" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Abonnement heeft als club" Association="Self.Abonnement heeft als club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="Abonnement heeft als zitplaats" Association="Self.Abonnement heeft als zitplaats">
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="bezoekers" Association="Self.bezoekers">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
+          </AssociationSet>
+          <AssociationSet Name="Boeking behoort tot wedstrijd" Association="Self.Boeking behoort tot wedstrijd">
+            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
+            <End Role="Boeking" EntitySet="Boeking" />
+          </AssociationSet>
+          <AssociationSet Name="boeking heeft als zitplaats" Association="Self.boeking heeft als zitplaats">
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+            <End Role="Boeking" EntitySet="Boeking" />
+          </AssociationSet>
+          <AssociationSet Name="club behoort tot stadion" Association="Self.club behoort tot stadion">
+            <End Role="Stadion" EntitySet="Stadion" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="FKZitPlaats951413" Association="Self.FKZitPlaats951413">
+            <End Role="Stadion" EntitySet="Stadion" />
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+          </AssociationSet>
+          <AssociationSet Name="klant heeft abonnement" Association="Self.klant heeft abonnement">
+            <End Role="Klant" EntitySet="Klant" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="klant maakt boeking" Association="Self.klant maakt boeking">
+            <End Role="Klant" EntitySet="Klant" />
+            <End Role="Boeking" EntitySet="Boeking" />
+          </AssociationSet>
+          <AssociationSet Name="thuisploeg" Association="Self.thuisploeg">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
+          </AssociationSet>
+          <AssociationSet Name="vak behoort tot zitplaats" Association="Self.vak behoort tot zitplaats">
+            <End Role="Vak" EntitySet="Vak" />
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VoetbalClubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="klant" />
+            <PropertyRef Name="zitplaats" />
+            <PropertyRef Name="club" />
+          </Key>
+          <Property Name="klant" Type="Int32" Nullable="false" />
+          <Property Name="zitplaats" Type="Int32" Nullable="false" />
+          <Property Name="club" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club1" Relationship="Self.Abonnement_heeft_als_club" FromRole="Abonnement" ToRole="Club" />
+          <NavigationProperty Name="ZitPlaats1" Relationship="Self.Abonnement_heeft_als_zitplaats" FromRole="Abonnement" ToRole="ZitPlaats" />
+          <NavigationProperty Name="Klant1" Relationship="Self.klant_heeft_abonnement" FromRole="Abonnement" ToRole="Klant" />
+        </EntityType>
+        <EntityType Name="Boeking">
+          <Key>
+            <PropertyRef Name="klant" />
+            <PropertyRef Name="zitplaats" />
+            <PropertyRef Name="Wedstrijd" />
+          </Key>
+          <Property Name="klant" Type="Int32" Nullable="false" />
+          <Property Name="zitplaats" Type="Int32" Nullable="false" />
+          <Property Name="Wedstrijd" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Wedstrijd1" Relationship="Self.Boeking_behoort_tot_wedstrijd" FromRole="Boeking" ToRole="Wedstrijd" />
+          <NavigationProperty Name="ZitPlaats1" Relationship="Self.boeking_heeft_als_zitplaats" FromRole="Boeking" ToRole="ZitPlaats" />
+          <NavigationProperty Name="Klant1" Relationship="Self.klant_maakt_boeking" FromRole="Boeking" ToRole="Klant" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stadion_id" Type="Int32" Nullable="false" />
+          <Property Name="naam" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="logo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Abonnement" Relationship="Self.Abonnement_heeft_als_club" FromRole="Club" ToRole="Abonnement" />
+          <NavigationProperty Name="Wedstrijd" Relationship="Self.bezoekers" FromRole="Club" ToRole="Wedstrijd" />
+          <NavigationProperty Name="Stadion" Relationship="Self.club_behoort_tot_stadion" FromRole="Club" ToRole="Stadion" />
+          <NavigationProperty Name="Wedstrijd1" Relationship="Self.thuisploeg" FromRole="Club" ToRole="Wedstrijd" />
+        </EntityType>
+        <EntityType Name="Klant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="voornaam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Abonnement" Relationship="Self.klant_heeft_abonnement" FromRole="Klant" ToRole="Abonnement" />
+          <NavigationProperty Name="Boeking" Relationship="Self.klant_maakt_boeking" FromRole="Klant" ToRole="Boeking" />
+        </EntityType>
+        <EntityType Name="Stadion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Club" Relationship="Self.club_behoort_tot_stadion" FromRole="Stadion" ToRole="Club" />
+          <NavigationProperty Name="ZitPlaats" Relationship="Self.FKZitPlaats951413" FromRole="Stadion" ToRole="ZitPlaats" />
+        </EntityType>
+        <EntityType Name="Vak">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ZitPlaats" Relationship="Self.vak_behoort_tot_zitplaats" FromRole="Vak" ToRole="ZitPlaats" />
+        </EntityType>
+        <EntityType Name="Wedstrijd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="thuisploeg" Type="Int32" Nullable="false" />
+          <Property Name="bezoekers" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Boeking" Relationship="Self.Boeking_behoort_tot_wedstrijd" FromRole="Wedstrijd" ToRole="Boeking" />
+          <NavigationProperty Name="Club" Relationship="Self.bezoekers" FromRole="Wedstrijd" ToRole="Club" />
+          <NavigationProperty Name="Club1" Relationship="Self.thuisploeg" FromRole="Wedstrijd" ToRole="Club" />
+        </EntityType>
+        <EntityType Name="ZitPlaats">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vak_id" Type="Int32" Nullable="false" />
+          <Property Name="stadion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Abonnement" Relationship="Self.Abonnement_heeft_als_zitplaats" FromRole="ZitPlaats" ToRole="Abonnement" />
+          <NavigationProperty Name="Boeking" Relationship="Self.boeking_heeft_als_zitplaats" FromRole="ZitPlaats" ToRole="Boeking" />
+          <NavigationProperty Name="Stadion1" Relationship="Self.FKZitPlaats951413" FromRole="ZitPlaats" ToRole="Stadion" />
+          <NavigationProperty Name="Vak" Relationship="Self.vak_behoort_tot_zitplaats" FromRole="ZitPlaats" ToRole="Vak" />
+        </EntityType>
+        <Association Name="Abonnement_heeft_als_club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="club" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Abonnement_heeft_als_zitplaats">
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZitPlaats">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="zitplaats" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="klant_heeft_abonnement">
+          <End Role="Klant" Type="Self.Klant" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klant">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="klant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Boeking_behoort_tot_wedstrijd">
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="1" />
+          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wedstrijd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boeking">
+              <PropertyRef Name="Wedstrijd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="boeking_heeft_als_zitplaats">
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="1" />
+          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZitPlaats">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boeking">
+              <PropertyRef Name="zitplaats" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="klant_maakt_boeking">
+          <End Role="Klant" Type="Self.Klant" Multiplicity="1" />
+          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klant">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boeking">
+              <PropertyRef Name="klant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bezoekers">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Wedstrijd">
+              <PropertyRef Name="bezoekers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="club_behoort_tot_stadion">
+          <End Role="Stadion" Type="Self.Stadion" Multiplicity="1" />
+          <End Role="Club" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stadion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="stadion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thuisploeg">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Wedstrijd">
+              <PropertyRef Name="thuisploeg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKZitPlaats951413">
+          <End Role="Stadion" Type="Self.Stadion" Multiplicity="1" />
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stadion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ZitPlaats">
+              <PropertyRef Name="stadion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vak_behoort_tot_zitplaats">
+          <End Role="Vak" Type="Self.Vak" Multiplicity="1" />
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vak">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ZitPlaats">
+              <PropertyRef Name="vak_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VoetbalClubEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abonnement" EntityType="Self.Abonnement" />
+          <EntitySet Name="Boeking" EntityType="Self.Boeking" />
+          <EntitySet Name="Club" EntityType="Self.Club" />
+          <EntitySet Name="Klant" EntityType="Self.Klant" />
+          <EntitySet Name="Stadion" EntityType="Self.Stadion" />
+          <EntitySet Name="Vak" EntityType="Self.Vak" />
+          <EntitySet Name="Wedstrijd" EntityType="Self.Wedstrijd" />
+          <EntitySet Name="ZitPlaats" EntityType="Self.ZitPlaats" />
+          <AssociationSet Name="Abonnement_heeft_als_club" Association="Self.Abonnement_heeft_als_club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="Abonnement_heeft_als_zitplaats" Association="Self.Abonnement_heeft_als_zitplaats">
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="klant_heeft_abonnement" Association="Self.klant_heeft_abonnement">
+            <End Role="Klant" EntitySet="Klant" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="Boeking_behoort_tot_wedstrijd" Association="Self.Boeking_behoort_tot_wedstrijd">
+            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
+            <End Role="Boeking" EntitySet="Boeking" />
+          </AssociationSet>
+          <AssociationSet Name="boeking_heeft_als_zitplaats" Association="Self.boeking_heeft_als_zitplaats">
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+            <End Role="Boeking" EntitySet="Boeking" />
+          </AssociationSet>
+          <AssociationSet Name="klant_maakt_boeking" Association="Self.klant_maakt_boeking">
+            <End Role="Klant" EntitySet="Klant" />
+            <End Role="Boeking" EntitySet="Boeking" />
+          </AssociationSet>
+          <AssociationSet Name="bezoekers" Association="Self.bezoekers">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
+          </AssociationSet>
+          <AssociationSet Name="club_behoort_tot_stadion" Association="Self.club_behoort_tot_stadion">
+            <End Role="Stadion" EntitySet="Stadion" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="thuisploeg" Association="Self.thuisploeg">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
+          </AssociationSet>
+          <AssociationSet Name="FKZitPlaats951413" Association="Self.FKZitPlaats951413">
+            <End Role="Stadion" EntitySet="Stadion" />
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+          </AssociationSet>
+          <AssociationSet Name="vak_behoort_tot_zitplaats" Association="Self.vak_behoort_tot_zitplaats">
+            <End Role="Vak" EntitySet="Vak" />
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VoetbalClubModelStoreContainer" CdmEntityContainer="VoetbalClubEntities">
+          <EntitySetMapping Name="Abonnement">
+            <EntityTypeMapping TypeName="VoetbalClubModel.Abonnement">
+              <MappingFragment StoreEntitySet="Abonnement">
+                <ScalarProperty Name="klant" ColumnName="klant" />
+                <ScalarProperty Name="zitplaats" ColumnName="zitplaats" />
+                <ScalarProperty Name="club" ColumnName="club" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boeking">
+            <EntityTypeMapping TypeName="VoetbalClubModel.Boeking">
+              <MappingFragment StoreEntitySet="Boeking">
+                <ScalarProperty Name="klant" ColumnName="klant" />
+                <ScalarProperty Name="zitplaats" ColumnName="zitplaats" />
+                <ScalarProperty Name="Wedstrijd" ColumnName="Wedstrijd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Club">
+            <EntityTypeMapping TypeName="VoetbalClubModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="stadion_id" ColumnName="stadion id" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klant">
+            <EntityTypeMapping TypeName="VoetbalClubModel.Klant">
+              <MappingFragment StoreEntitySet="Klant">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="voornaam" ColumnName="voornaam" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stadion">
+            <EntityTypeMapping TypeName="VoetbalClubModel.Stadion">
+              <MappingFragment StoreEntitySet="Stadion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vak">
+            <EntityTypeMapping TypeName="VoetbalClubModel.Vak">
+              <MappingFragment StoreEntitySet="Vak">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wedstrijd">
+            <EntityTypeMapping TypeName="VoetbalClubModel.Wedstrijd">
+              <MappingFragment StoreEntitySet="Wedstrijd">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="thuisploeg" ColumnName="thuisploeg" />
+                <ScalarProperty Name="bezoekers" ColumnName="bezoekers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZitPlaats">
+            <EntityTypeMapping TypeName="VoetbalClubModel.ZitPlaats">
+              <MappingFragment StoreEntitySet="ZitPlaats">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vak_id" ColumnName="vak id" />
+                <ScalarProperty Name="stadion" ColumnName="stadion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
