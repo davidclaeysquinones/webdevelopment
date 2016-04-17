@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Voetbal.DAO
+namespace Voetbal.Services
 {
-    public class Class1
+    class ClubService
     {
     }
 }
