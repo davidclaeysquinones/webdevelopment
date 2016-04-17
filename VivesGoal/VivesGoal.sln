@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voetbal.Model", "Model\Voet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voetbal.DAO", "Voetbal.DAO\Voetbal.DAO.csproj", "{C233B728-4086-4D2A-B0CA-0605E1ABBD47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voetbal.Services", "Voetbal.Services\Voetbal.Services.csproj", "{C35D5217-683F-4ADC-B75D-86664D3ED218}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voetbal.Service", "Voetbal.Service\Voetbal.Service.csproj", "{3BB541D4-8722-4500-B799-9EE0956E618F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{C233B728-4086-4D2A-B0CA-0605E1ABBD47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C233B728-4086-4D2A-B0CA-0605E1ABBD47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C233B728-4086-4D2A-B0CA-0605E1ABBD47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C35D5217-683F-4ADC-B75D-86664D3ED218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C35D5217-683F-4ADC-B75D-86664D3ED218}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C35D5217-683F-4ADC-B75D-86664D3ED218}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C35D5217-683F-4ADC-B75D-86664D3ED218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB541D4-8722-4500-B799-9EE0956E618F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB541D4-8722-4500-B799-9EE0956E618F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB541D4-8722-4500-B799-9EE0956E618F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB541D4-8722-4500-B799-9EE0956E618F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

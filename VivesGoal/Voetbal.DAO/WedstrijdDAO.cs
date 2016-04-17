@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 
 namespace Voetbal.DAO
 {
-    class WedstrijdDAO
+    public class WedstrijdDAO
     {
+        public IEnumerable<Wedstrijd> All()
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                return db.Wedstrijd.ToList();
+            }
+        }
     }
 }

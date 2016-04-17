@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VoetbalClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+      <Schema Namespace="VoetbalClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abonnement">
           <Key>
             <PropertyRef Name="klant" />
@@ -265,7 +265,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="VoetbalClubModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+      <Schema Namespace="VoetbalClubModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityType Name="Abonnement">
           <Key>
             <PropertyRef Name="klant" />
@@ -296,7 +296,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="stadion_id" Type="Int32" Nullable="false" />
           <Property Name="naam" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="logo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -309,7 +309,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="voornaam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -320,7 +320,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Club" Relationship="Self.club_behoort_tot_stadion" FromRole="Stadion" ToRole="Club" />
@@ -330,7 +330,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ZitPlaats" Relationship="Self.vak_behoort_tot_zitplaats" FromRole="Vak" ToRole="ZitPlaats" />
         </EntityType>
@@ -338,7 +338,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="thuisploeg" Type="Int32" Nullable="false" />
           <Property Name="bezoekers" Type="Int32" Nullable="false" />
@@ -350,7 +350,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="vak_id" Type="Int32" Nullable="false" />
           <Property Name="stadion" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Abonnement" Relationship="Self.Abonnement_heeft_als_zitplaats" FromRole="ZitPlaats" ToRole="Abonnement" />
@@ -490,7 +490,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VoetbalClubEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="VoetbalClubEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="Abonnement" EntityType="Self.Abonnement" />
           <EntitySet Name="Boeking" EntityType="Self.Boeking" />
           <EntitySet Name="Club" EntityType="Self.Club" />
@@ -548,7 +548,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="VoetbalClubModelStoreContainer" CdmEntityContainer="VoetbalClubEntities">
           <EntitySetMapping Name="Abonnement">
             <EntityTypeMapping TypeName="VoetbalClubModel.Abonnement">

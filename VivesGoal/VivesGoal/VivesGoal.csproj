@@ -235,10 +235,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Introductie\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutIntroductie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Introductie\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -256,10 +257,6 @@
     <ProjectReference Include="..\Voetbal.DAO\Voetbal.DAO.csproj">
       <Project>{c233b728-4086-4d2a-b0ca-0605e1abbd47}</Project>
       <Name>Voetbal.DAO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Voetbal.Services\Voetbal.Services.csproj">
-      <Project>{c35d5217-683f-4adc-b75d-86664d3ed218}</Project>
-      <Name>Voetbal.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
