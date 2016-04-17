@@ -13,5 +13,12 @@ namespace VivesGoal.Controllers
         {
             return View();
         }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Meer info over de site.";
+
+            return View();
+        }
     }
 }
