@@ -246,6 +246,20 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Voetbal.Model.csproj">
+      <Project>{5965aeb6-a646-4314-a884-baab11ee0087}</Project>
+      <Name>Voetbal.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Voetbal.DAO\Voetbal.DAO.csproj">
+      <Project>{c233b728-4086-4d2a-b0ca-0605e1abbd47}</Project>
+      <Name>Voetbal.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Voetbal.Services\Voetbal.Services.csproj">
+      <Project>{c35d5217-683f-4adc-b75d-86664d3ed218}</Project>
+      <Name>Voetbal.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
