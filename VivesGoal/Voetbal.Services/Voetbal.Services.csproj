@@ -49,10 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbonnementService.cs" />
+    <Compile Include="BoekingService.cs" />
     <Compile Include="ClubService.cs" />
+    <Compile Include="KlantService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StadionService.cs" />
     <Compile Include="VakService.cs" />
+    <Compile Include="WedstrijdService.cs" />
+    <Compile Include="ZitplaatsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
