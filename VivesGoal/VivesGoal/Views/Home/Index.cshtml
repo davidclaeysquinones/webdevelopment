@@ -1,6 +1,11 @@
-﻿@{
+﻿@using Model
+@model IEnumerable<Model.Stadion>
+
+@{
     ViewBag.Title = "Home Page";
 }
+
+@Html.DisplayNameFor(model => model.naam);
 
 <div class="jumbotron">
     <h1>ASP.NET</h1>

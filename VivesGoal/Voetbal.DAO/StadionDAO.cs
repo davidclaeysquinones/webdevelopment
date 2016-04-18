@@ -14,6 +14,7 @@ namespace Voetbal.DAO
             using (var db = new VoetbalClubEntities())
             {
                 return db.Stadion.ToList();
+
             }
         }
     }
