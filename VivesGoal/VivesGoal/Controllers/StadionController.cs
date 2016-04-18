@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Model;
+using Voetbal.Services;
 
 namespace VivesGoal.Controllers
 {
     public class StadionController : Controller
     {
+        private StadionService stadionService;
+
+        public StadionController()
+        {
+            stadionService = new StadionService();
+        }
+
         // GET: Stadion
         public ActionResult Index()
         {
-            return View();
+            var stadions = stadionService.All();
+            return View(stadions);
         }
 
         // GET: Stadion/Details/5

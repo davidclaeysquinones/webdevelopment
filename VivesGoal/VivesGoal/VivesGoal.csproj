@@ -241,11 +241,9 @@
     <Content Include="Views\Shared\_LayoutIntroductie.cshtml" />
     <Content Include="Views\Introductie\Index.cshtml" />
     <Content Include="Views\Introductie\About.cshtml" />
-    <Content Include="Views\Stadion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

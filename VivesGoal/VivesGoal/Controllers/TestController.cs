@@ -4,14 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Voetbal.Services;
-using Voetbal.DAO;
 
 namespace VivesGoal.Controllers
 {
     public class TestController : Controller
     {
         private StadionService stadionService;
-
         public TestController()
         {
             stadionService = new StadionService();

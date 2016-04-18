@@ -67,6 +67,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Voetbal.Model.csproj">
+      <Project>{5965aeb6-a646-4314-a884-baab11ee0087}</Project>
+      <Name>Voetbal.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Voetbal.DAO\Voetbal.DAO.csproj">
       <Project>{C233B728-4086-4D2A-B0CA-0605E1ABBD47}</Project>
       <Name>Voetbal.DAO</Name>

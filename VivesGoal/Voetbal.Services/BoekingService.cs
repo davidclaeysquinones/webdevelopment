@@ -3,10 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
+using Voetbal.DAO;
 
 namespace Voetbal.Services
 {
-    class BoekingService
+    public class BoekingService
     {
+        private BoekingDAO boekingDAO;
+
+
+        public IEnumerable<Boeking> All()
+        {
+            return boekingDAO.All();
+        }
     }
+
+
 }
