@@ -13,6 +13,11 @@ namespace Voetbal.Services
     {
         private AbonnementDAO abonnementDAO;
 
+        public AbonnementService()
+        {
+            abonnementDAO = new AbonnementDAO();
+        }
+
         public IEnumerable<Abonnement> All()
         {
             return abonnementDAO.All();

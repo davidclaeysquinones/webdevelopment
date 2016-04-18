@@ -12,6 +12,10 @@ namespace Voetbal.Services
     {
         private ClubDAO clubDAO;
 
+        public ClubService()
+        {
+            clubDAO = new ClubDAO();
+        }
         public IEnumerable<Club> All()
         {
             return clubDAO.All();

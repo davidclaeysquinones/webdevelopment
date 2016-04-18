@@ -12,6 +12,11 @@ namespace Voetbal.Services
     {
         private StadionDAO stadionDAO;
 
+        public StadionService()
+        {
+            stadionDAO = new StadionDAO();
+        }
+
         public IEnumerable<Stadion> All()
         {
             return stadionDAO.All();

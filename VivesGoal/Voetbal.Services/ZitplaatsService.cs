@@ -12,6 +12,10 @@ namespace Voetbal.Services
     {
         private ZitplaatsDAO zitplaatsDAO;
 
+        public ZitplaatsService()
+        {
+            zitplaatsDAO = new ZitplaatsDAO();
+        }
         public IEnumerable<ZitPlaats> All()
         {
             return zitplaatsDAO.All();
