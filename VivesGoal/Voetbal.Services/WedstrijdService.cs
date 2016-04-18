@@ -12,6 +12,10 @@ namespace Voetbal.Services
     {
         private WedstrijdDAO wedstrijdDAO;
 
+        public WedstrijdService()
+        {
+            wedstrijdDAO = new WedstrijdDAO();
+        }
         public IEnumerable<Wedstrijd> All()
         {
             return wedstrijdDAO.All();

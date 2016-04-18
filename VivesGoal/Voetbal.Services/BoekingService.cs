@@ -12,7 +12,10 @@ namespace Voetbal.Services
     {
         private BoekingDAO boekingDAO;
 
-
+        public BoekingService()
+        {
+            boekingDAO = new BoekingDAO();
+        }
         public IEnumerable<Boeking> All()
         {
             return boekingDAO.All();

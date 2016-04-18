@@ -11,6 +11,11 @@ namespace Voetbal.Services
     public class VakService
     {
         private VakDAO vakDAO;
+
+        public VakService()
+        {
+            vakDAO = new VakDAO();
+        }
         public IEnumerable<Vak> All()
         {
             return vakDAO.All();

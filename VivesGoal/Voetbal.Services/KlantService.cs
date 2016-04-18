@@ -10,11 +10,15 @@ namespace Voetbal.Services
 {
     public class KlantService
     {
-        private KlantDAO klantDao;
+        private KlantDAO klantDAO;
 
+        public KlantService()
+        {
+            klantDAO = new KlantDAO();
+        }
         public IEnumerable<Klant> All()
         {
-            return klantDao.All();
+            return klantDAO.All();
         }
     }
 }
