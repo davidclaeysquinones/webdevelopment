@@ -19,6 +19,7 @@ namespace Voetbal.Services
         public IEnumerable<Wedstrijd> All()
         {
             return wedstrijdDAO.All();
+
         }
     }
 }
