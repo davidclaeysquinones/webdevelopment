@@ -20,5 +20,12 @@ namespace VivesGoal.Controllers
 
             return View();
         }
+
+        public ActionResult Ticket()
+        {
+            ViewBag.Message = "Tickets Bestellen.";
+
+            return View();
+        }
     }
 }
