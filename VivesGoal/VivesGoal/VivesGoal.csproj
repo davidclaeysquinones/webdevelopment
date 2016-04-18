@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroductieController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -259,6 +261,10 @@
     <ProjectReference Include="..\Voetbal.DAO\Voetbal.DAO.csproj">
       <Project>{c233b728-4086-4d2a-b0ca-0605e1abbd47}</Project>
       <Name>Voetbal.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Voetbal.Service\Voetbal.Service.csproj">
+      <Project>{3bb541d4-8722-4500-b799-9ee0956e618f}</Project>
+      <Name>Voetbal.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
