@@ -19,6 +19,7 @@ namespace VivesGoal.Controllers
         // GET: Test
         public ActionResult Index()
         {
+         
             var stadions = stadionService.All();
             return View(stadions);
         }

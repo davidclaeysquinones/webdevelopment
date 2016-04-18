@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Voetbal.Services
 {
-    class StadionService
+    public class StadionService
     {
+
     }
 }

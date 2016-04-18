@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroductieController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StadionController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,6 +241,7 @@
     <Content Include="Views\Shared\_LayoutIntroductie.cshtml" />
     <Content Include="Views\Introductie\Index.cshtml" />
     <Content Include="Views\Introductie\About.cshtml" />
+    <Content Include="Views\Stadion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -261,6 +263,10 @@
     <ProjectReference Include="..\Voetbal.DAO\Voetbal.DAO.csproj">
       <Project>{c233b728-4086-4d2a-b0ca-0605e1abbd47}</Project>
       <Name>Voetbal.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Voetbal.Services\Voetbal.Services.csproj">
+      <Project>{c35d5217-683f-4adc-b75d-86664d3ed218}</Project>
+      <Name>Voetbal.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
