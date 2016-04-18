@@ -240,10 +240,10 @@
     <Content Include="Views\Shared\_LayoutIntroductie.cshtml" />
     <Content Include="Views\Introductie\Index.cshtml" />
     <Content Include="Views\Introductie\About.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -261,6 +261,10 @@
     <ProjectReference Include="..\Voetbal.DAO\Voetbal.DAO.csproj">
       <Project>{c233b728-4086-4d2a-b0ca-0605e1abbd47}</Project>
       <Name>Voetbal.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Voetbal.Services\Voetbal.Services.csproj">
+      <Project>{c35d5217-683f-4adc-b75d-86664d3ed218}</Project>
+      <Name>Voetbal.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
