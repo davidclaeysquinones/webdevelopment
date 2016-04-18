@@ -260,6 +260,10 @@
       <Project>{c233b728-4086-4d2a-b0ca-0605e1abbd47}</Project>
       <Name>Voetbal.DAO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Voetbal.Services\Voetbal.Services.csproj">
+      <Project>{c35d5217-683f-4adc-b75d-86664d3ed218}</Project>
+      <Name>Voetbal.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

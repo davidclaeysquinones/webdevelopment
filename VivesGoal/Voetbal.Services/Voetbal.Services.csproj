@@ -66,6 +66,12 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Voetbal.DAO\Voetbal.DAO.csproj">
+      <Project>{C233B728-4086-4D2A-B0CA-0605E1ABBD47}</Project>
+      <Name>Voetbal.DAO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
