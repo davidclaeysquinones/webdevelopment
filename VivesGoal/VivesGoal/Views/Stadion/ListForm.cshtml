@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Model.Stadion>
+
+@{
+    ViewBag.Title = "ListForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListForm</h2>
+@using (Html.BeginForm())
+{
+    @Html.DropDownList("StadionId",null,htmlAttributes: new {@class = "form-control"})
+
+    <input Type="submit" value="Toon Stadions" class="btn btn-default"/>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.naam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adres)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.naam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adres)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>*@

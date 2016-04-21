@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Model;
 using Voetbal.Services;
 
 namespace VivesGoal.Controllers
@@ -11,7 +10,6 @@ namespace VivesGoal.Controllers
     public class StadionController : Controller
     {
         private StadionService stadionService;
-
         public StadionController()
         {
             stadionService = new StadionService();
@@ -20,8 +18,20 @@ namespace VivesGoal.Controllers
         // GET: Stadion
         public ActionResult Index()
         {
-            var stadions = stadionService.All();
-            return View(stadions);
+            return View();
+        }
+
+        public ActionResult ListForm()
+        {
+            ViewBag.StadionId = new SelectList(stadionService.All(),"adres","naam");
+
+            return View();
+        }
+
+        [HttpPost] //lijst van stadion wordt naar deze methode teruggestuurd
+        public ActionResult ListForm(int? stadionId)
+        {
+            return View();
         }
 
         // GET: Stadion/Details/5
