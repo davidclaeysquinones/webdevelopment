@@ -16,5 +16,13 @@ namespace Voetbal.DAO
                 return db.Wedstrijd.ToList();
             }
         }
+
+        public IEnumerable<Wedstrijd> Get(DateTime date)
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                return db.Wedstrijd.Where(w => w.datum == date).ToList();
+            }
+        } 
     }
 }

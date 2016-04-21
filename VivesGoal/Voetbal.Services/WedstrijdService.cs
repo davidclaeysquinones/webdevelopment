@@ -21,5 +21,10 @@ namespace Voetbal.Services
             return wedstrijdDAO.All();
 
         }
+
+        public IEnumerable<Wedstrijd> Get(DateTime date)
+        {
+            return wedstrijdDAO.Get(date);
+        } 
     }
 }
