@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Model;
@@ -27,6 +29,32 @@ namespace VivesGoal.Controllers
             ViewBag.ClubId = new SelectList(clubService.All(), "id","naam");
             return View(wedstrijden);
         }
+
+        [HttpPost]
+        public ActionResult Index(int ? id, string dateField)
+        {
+            if (id == null || dateField == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            try
+            {
+                DateTime date = DateTime.ParseExact(Convert.ToString(dateField).Substring(0,15), "ddd MMM dd yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+            }
+            catch (FormatException e)
+            {
+                Trace.WriteLine(Convert.ToString(dateField).Substring(0, 15));
+                Trace.WriteLine(e.Message);
+                return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
+            }
+         
+            IEnumerable <Wedstrijd> wedstrijden = wedstrijdService.Get(Convert.ToInt16(id));
+            ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
+            return View(wedstrijden);
+        }
+        
 
         // GET: Calender/Details/5
         public ActionResult Details(int id)

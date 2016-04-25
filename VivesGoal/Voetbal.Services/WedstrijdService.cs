@@ -25,6 +25,11 @@ namespace Voetbal.Services
         public IEnumerable<Wedstrijd> Get(DateTime date)
         {
             return wedstrijdDAO.Get(date);
+        }
+
+        public IEnumerable<Wedstrijd> Get(int clubid)
+        {
+            return wedstrijdDAO.Get(clubid);
         } 
     }
 }

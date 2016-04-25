@@ -23,6 +23,15 @@ namespace Voetbal.DAO
             {
                 return db.Wedstrijd.Where(w => w.datum == date).ToList();
             }
-        } 
+        }
+
+        public IEnumerable<Wedstrijd> Get(int clubid)
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                return db.Wedstrijd.Where(w => w.bezoekers == clubid || w.thuisploeg == clubid).ToList();
+            }
+        }
+             
     }
 }
