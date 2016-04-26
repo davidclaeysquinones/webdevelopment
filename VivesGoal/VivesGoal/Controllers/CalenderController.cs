@@ -21,111 +21,56 @@ namespace VivesGoal.Controllers
             wedstrijdService = new WedstrijdService();
             clubService = new ClubService();
         }
+
         // GET: Calender
         public ActionResult Index()
         {
-        
+
             IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.All();
-            ViewBag.ClubId = new SelectList(clubService.All(), "id","naam");
-            return View(wedstrijden);
-        }
-
-        [HttpPost]
-        public ActionResult Index(int ? id, string dateField)
-        {
-            if (id == null || dateField == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            try
-            {
-                DateTime date = DateTime.ParseExact(Convert.ToString(dateField).Substring(0,15), "ddd MMM dd yyyy", System.Globalization.CultureInfo.InvariantCulture);
-
-            }
-            catch (FormatException e)
-            {
-                Trace.WriteLine(Convert.ToString(dateField).Substring(0, 15));
-                Trace.WriteLine(e.Message);
-                return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
-            }
-         
-            IEnumerable <Wedstrijd> wedstrijden = wedstrijdService.Get(Convert.ToInt16(id));
             ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
             return View(wedstrijden);
         }
-        
 
-        // GET: Calender/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Calender/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Calender/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Index(int? id, string dateField1, string dateField2)
         {
+            if (id == null || dateField1 == null || dateField2 == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DateTime date1;
+            DateTime date2;
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                date1 = DateTime.ParseExact(Convert.ToString(dateField1).Substring(0, 15), "ddd MMM dd yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture);
+                date2 = DateTime.ParseExact(Convert.ToString(dateField2).Substring(0, 15), "ddd MMM dd yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture);
             }
-            catch
+            catch (FormatException e)
             {
-                return View();
+                Trace.WriteLine(e.Message);
+                return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
             }
+
+            if (date1 > date2)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
+            }
+
+            if (date2 < date1)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
+            }
+
+            IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.Get(Convert.ToInt16(id), date1, date2);
+            ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
+          
+
+            return View(wedstrijden);
         }
 
-        // GET: Calender/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Calender/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Calender/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Calender/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

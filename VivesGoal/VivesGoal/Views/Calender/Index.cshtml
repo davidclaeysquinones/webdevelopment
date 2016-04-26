@@ -1,24 +1,39 @@
 ﻿@using Model
 @model IEnumerable<Model.Wedstrijd>
 
-    @{
-        ViewBag.Title = "Index";
-    }
+@{
+    ViewBag.Title = "Index";
+}
 
 
-<h2>Calender</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Calender</h2>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-3 col-md-4"></div>
             <div class="col-sm-3 col-md-4">
                 Selecteer deelnemende ploeg
+                @Html.DropDownList("id", (SelectList)ViewBag.ClubId, htmlAttributes: new { @class = "form-control" })
+
             </div>
             <div class="col-sm-3 col-md-4">
-                Selecteer een datum
+                Selecteer een tijdspanne
+                <p>
+                    begindatum : <input type="text" id="datepicker1">
+                </p>
+                <p>
+                    eindatum : <input type="text" id="datepicker2">
+                </p>
+
             </div>
             <div class="col-sm-3 col-md-4"></div>
 
@@ -26,70 +41,115 @@
         <div class="row">
             <div class="col-sm-3 col-md-4"></div>
             <div class="col-sm-3 col-md-4">
-                @Html.DropDownList("id", (SelectList) ViewBag.ClubId, htmlAttributes: new {@class = "form-control"})
-            </div>
-            <div class="col-sm-3 col-md-4">
-                <input type="text" id="datepicker">
+                <input type="submit" value="Zend" class="btn btn-default" />
             </div>
             <div class="col-sm-3 col-md-4"></div>
-
+            <div class="col-sm-3 col-md-4"></div>
         </div>
-
-
     </div>
-    <input type="hidden" name="dateField" id="dateField" value="test" />
+
+
+    <input type="hidden" name="dateField1" id="dateField1" value="test" />
+    <input type="hidden" name="dateField2" id="dateField2" value="test" />
+
+
     <script type="text/javascript">
 
         window.onload = function () {
-            var currentDate;
+            var currentDate1;
+            var currentDate2;
             $(document).ready(function () {
 
-                $('#datepicker').datepicker(
+                $('#datepicker1').datepicker(
                 {
                     dateFormat: "dd-mm-yy",
-                    onSelect: function() {
-                        currentDate = $("#datepicker").datepicker("getDate");
-                        if (currentDate != null) {
-                            console.log(currentDate);
-                            $("form").trigger(currentDate);
-                            $('#dateField').val(currentDate);
+                    onSelect: function () {
+                        currentDate1 = $("#datepicker1").datepicker("getDate");
+                        if (currentDate1 != null) {
+                            console.log(currentDate1);
+                            $('#dateField1').val(currentDate1);
+                            $("#datepicker2").datepicker('option', 'minDate', currentDate1);
+                            if (currentDate2 < currentDate1) {
+                                $('#datepicker2').datepicker("setDate", currentDate1);
+                            }
                         }
                     }
                 });
-                
 
-                $('#datepicker').datepicker("setDate", new Date());
-                currentDate = $("#datepicker").datepicker("getDate");
-                $('#dateField').val(currentDate);
+                $('#datepicker2').datepicker(
+                {
+                    dateFormat: "dd-mm-yy",
+                    onSelect: function () {
+                        currentDate2 = $("#datepicker2").datepicker("getDate");
+                        if (currentDate2 != null) {
+                            console.log(currentDate2);
 
-                
+                            $('#dateField2').val(currentDate2);
+                            $("#datepicker1").datepicker('option', 'maxDate', currentDate2);
+                            if (currentDate1 > currentDate2) {
+                                $('#datepicker1').datepicker("setDate", currentDate2);
+                            }
+                        }
+                    }
+                });
+
+
+                $('#datepicker1').datepicker("setDate", new Date());
+                currentDate1 = $("#datepicker1").datepicker("getDate");
+                $('#dateField1').val(currentDate1);
+
+                $('#datepicker2').datepicker("setDate", new Date());
+                currentDate2 = $("#datepicker2").datepicker("getDate");
+                $('#dateField2').val(currentDate2);
+
+                $("#datepicker1").datepicker('option', 'maxDate', currentDate2);
+                $("#datepicker2").datepicker('option', 'minDate', currentDate1);
+
             });
         }
 
 
     </script>
 
-
-
-
-if (Model != null)
- {
-     foreach (Wedstrijd wedstrijd in Model)
-     {
-         @Html.DisplayFor(item => wedstrijd.datum)
-         ;
-     }
-
-     <input type="submit" value="Zend" class="btn btn-default"/>
-
- }
- else
- {
-     <p>Er werden geen wedstrijden gevonden op deze datum</p>
- }
 }
 
-    
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.datum)
+        </th>
+        <th>
+            thuisploeg
+        </th>
+        <th>
+            bezoekers
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.datum)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Club.naam)
+            </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Club1.naam)
+            </td>*@
+
+        </tr>
+    }
+
+</table>
+
+
+
+
+
 
 
 

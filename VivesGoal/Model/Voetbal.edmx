@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VoetbalClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="VoetbalClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abonnement">
           <Key>
             <PropertyRef Name="klant" />
@@ -208,14 +208,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="VoetbalClubModelStoreContainer">
-          <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Boeking" EntityType="Self.Boeking" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Klant" EntityType="Self.Klant" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Stadion" EntityType="Self.Stadion" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Vak" EntityType="Self.Vak" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Wedstrijd" EntityType="Self.Wedstrijd" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="ZitPlaats" EntityType="Self.ZitPlaats" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boeking" EntityType="Self.Boeking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klant" EntityType="Self.Klant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stadion" EntityType="Self.Stadion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vak" EntityType="Self.Vak" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wedstrijd" EntityType="Self.Wedstrijd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZitPlaats" EntityType="Self.ZitPlaats" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Abonnement heeft als club" Association="Self.Abonnement heeft als club">
             <End Role="Club" EntitySet="Club" />
             <End Role="Abonnement" EntitySet="Abonnement" />
@@ -261,8 +261,7 @@
             <End Role="ZitPlaats" EntitySet="ZitPlaats" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VoetbalClubModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
