@@ -9,6 +9,7 @@ namespace VivesGoal.Controllers
 {
     public class StadionController : Controller
     {
+        
         private StadionService stadionService;
         public StadionController()
         {
@@ -25,7 +26,7 @@ namespace VivesGoal.Controllers
         {
             ViewBag.StadionId = new SelectList(stadionService.All(),"adres","naam");
 
-            return View();
+            return View(stadionService.All());
         }
 
         [HttpPost] //lijst van stadion wordt naar deze methode teruggestuurd
