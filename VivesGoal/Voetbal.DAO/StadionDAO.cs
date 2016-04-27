@@ -17,5 +17,13 @@ namespace Voetbal.DAO
 
             }
         }
+
+        public Stadion Get(int id)
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                return db.Stadion.Find(id);
+            }
+        } 
     }
 }

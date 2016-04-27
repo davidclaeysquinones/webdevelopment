@@ -32,6 +32,7 @@ namespace VivesGoal.Controllers
         [HttpPost] //lijst van stadion wordt naar deze methode teruggestuurd
         public ActionResult ListForm(int? stadionId)
         {
+            ViewBag.StadionId = new SelectList(stadionService.All(), "adres", "naam");
             return View();
         }
 
