@@ -1,5 +1,5 @@
 ﻿@using Model
-@model IQueryable<Calender>
+@model IEnumerable<Wedstrijd>
 
 @{
     ViewBag.Title = "Index";
@@ -31,7 +31,7 @@
                     begindatum : <input type="text" id="datepicker1">
                 </p>
                 <p>
-                    eindatum : <input type="text" id="datepicker2">
+                    eindatum   : <input type="text" id="datepicker2">
                 </p>
 
             </div>
@@ -49,9 +49,8 @@
     </div>
 
 
-    <input type="hidden" name="dateField1" id="dateField1" value="test" />
-    <input type="hidden" name="dateField2" id="dateField2" value="test" />
-
+    <input type="hidden" name="dateField1" id="dateField1" value="@ViewBag.Begindatum" />
+    <input type="hidden" name="dateField2" id="dateField2" value="@ViewBag.EindDatum"/>
 
     <script type="text/javascript">
 
@@ -63,6 +62,7 @@
                 $('#datepicker1').datepicker(
                 {
                     dateFormat: "dd-mm-yy",
+                    firstDay: 1,
                     onSelect: function () {
                         currentDate1 = $("#datepicker1").datepicker("getDate");
                         if (currentDate1 != null) {
@@ -79,6 +79,7 @@
                 $('#datepicker2').datepicker(
                 {
                     dateFormat: "dd-mm-yy",
+                    firstDay: 1,
                     onSelect: function () {
                         currentDate2 = $("#datepicker2").datepicker("getDate");
                         if (currentDate2 != null) {
@@ -93,12 +94,24 @@
                     }
                 });
 
+                if ($('#dateField1').val() != null) {
+                    $('#datepicker1').datepicker("setDate", new Date($('#dateField1').val()));
+                } else {
+                    $('#datepicker1').datepicker("setDate", new Date());
+                }
+                
 
-                $('#datepicker1').datepicker("setDate", new Date());
                 currentDate1 = $("#datepicker1").datepicker("getDate");
                 $('#dateField1').val(currentDate1);
 
-                $('#datepicker2').datepicker("setDate", new Date());
+                if ($('#dateField2').val() != null) {
+                    $('#datepicker2').datepicker("setDate", new Date($('#dateField2').val()));
+                } else {
+                    $('#datepicker2').datepicker("setDate", new Date());
+                }
+        
+ 
+                
                 currentDate2 = $("#datepicker2").datepicker("getDate");
                 $('#dateField2').val(currentDate2);
 
@@ -117,7 +130,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.datum)
+            datum
         </th>
         <th>
             thuisploeg
@@ -127,7 +140,7 @@
         </th>
         <th></th>
     </tr>
-
+    
     @foreach (var item in Model)
     {
         <tr>

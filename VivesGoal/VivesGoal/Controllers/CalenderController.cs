@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Model;
+using VivesGoal.ViewModel;
 using Voetbal.Services;
 
 namespace VivesGoal.Controllers
@@ -26,8 +27,11 @@ namespace VivesGoal.Controllers
         public ActionResult Index()
         {
 
-            IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.All();
             ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
+            IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.All();
+
+           
+
             return View(wedstrijden);
         }
 
@@ -65,7 +69,8 @@ namespace VivesGoal.Controllers
 
             IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.Get(Convert.ToInt16(id), date1, date2);
             ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
-          
+            ViewBag.Begindatum = dateField1;
+            ViewBag.EindDatum = dateField2;
 
             return View(wedstrijden);
         }

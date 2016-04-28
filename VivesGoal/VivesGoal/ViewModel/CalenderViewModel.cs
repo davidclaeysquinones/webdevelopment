@@ -7,12 +7,26 @@ using Model;
 
 namespace VivesGoal.ViewModel
 {
-    class CalenderViewModel
+    public class CalenderViewModel
     {
-        private IEnumerable<Wedstrijd> wedstrijden { get; set; } 
 
-        private DateTime begindDatum { get; set; }
+        public IEnumerable<Wedstrijd> wedstrijden { get; set; } 
 
-        private DateTime eindDatum { get; set; }
+        public DateTime beginDatum { get; set; }
+
+        public DateTime eindDatum { get; set; }
+
+
+        public CalenderViewModel()
+        {
+
+        }
+
+        public CalenderViewModel(IEnumerable<Wedstrijd> wedstrijden, DateTime beginDatum, DateTime eindDatum)
+        {
+            this.wedstrijden = wedstrijden;
+            this.beginDatum = beginDatum;
+            this.eindDatum = eindDatum;
+        }
     }
 }

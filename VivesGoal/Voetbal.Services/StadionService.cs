@@ -21,5 +21,10 @@ namespace Voetbal.Services
         {
             return stadionDAO.All();
         }
+
+        public Stadion Get(int id)
+        {
+            return stadionDAO.Get(id);
+        }
     }
 }

@@ -8,7 +8,8 @@
 <h2>ListForm</h2>
 @using (Html.BeginForm())
 {
-    @Html.DropDownList("StadionId",null,htmlAttributes: new {@class = "form-control"})
+    @Html.AntiForgeryToken()
+   @Html.DropDownList("stadionId", (SelectList)ViewBag.StadionId, htmlAttributes: new { @class = "form-control" })
 
     <input Type="submit" value="Toon Stadions" class="btn btn-default"/>
 
@@ -35,7 +36,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.adres)
             </td>
-          >
         </tr>
     }
 

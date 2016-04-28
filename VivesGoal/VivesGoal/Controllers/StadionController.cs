@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Model;
 using Voetbal.Services;
 
 namespace VivesGoal.Controllers
@@ -24,16 +26,26 @@ namespace VivesGoal.Controllers
 
         public ActionResult ListForm()
         {
-            ViewBag.StadionId = new SelectList(stadionService.All(),"adres","naam");
+            ViewBag.StadionId = new SelectList(stadionService.All(),"id","naam");
 
             return View(stadionService.All());
         }
 
         [HttpPost] //lijst van stadion wordt naar deze methode teruggestuurd
-        public ActionResult ListForm(int? stadionId)
+        public ActionResult ListForm(int ?stadionId)
         {
-            ViewBag.StadionId = new SelectList(stadionService.All(), "adres", "naam");
-            return View();
+            if (stadionId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ViewBag.StadionId = new SelectList(stadionService.All(), "id", "naam");
+
+            var stadion = stadionService.Get(Convert.ToInt32(stadionId));
+            IEnumerable<Stadion> stadions = new List<Stadion>{ stadion };
+
+       
+       
+            return View(stadions);
         }
 
         // GET: Stadion/Details/5
