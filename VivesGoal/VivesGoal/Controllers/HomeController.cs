@@ -12,18 +12,16 @@ namespace VivesGoal.Controllers
     public class HomeController : Controller
     {
 
-        private StadionDAO stadionDao;
 
         public HomeController() 
         {
-            stadionDao=new StadionDAO();
+
         }
 
         public ActionResult Index()
         {
 
-            var stadionlist = stadionDao.All();
-            return View(stadionlist);
+
         }
 
         public ActionResult About()
