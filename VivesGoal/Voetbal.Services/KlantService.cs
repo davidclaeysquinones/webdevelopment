@@ -16,7 +16,7 @@ namespace Voetbal.Services
         {
             klantDAO = new KlantDAO();
         }
-        public IEnumerable<Klant> All()
+        public IEnumerable<AspNetUsers> All()
         {
             return klantDAO.All();
         }

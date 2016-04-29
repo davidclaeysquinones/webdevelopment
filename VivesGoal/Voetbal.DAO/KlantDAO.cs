@@ -9,11 +9,11 @@ namespace Voetbal.DAO
 {
     public class KlantDAO
     {
-        public IEnumerable<Klant> All()
+        public IEnumerable<AspNetUsers> All()
         {
             using (var db = new VoetbalClubEntities())
             {
-                return db.Klant.ToList();
+                return db.AspNetUsers.ToList();
             }
         }
     }
