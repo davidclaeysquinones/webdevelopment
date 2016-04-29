@@ -105,25 +105,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abonnement.cs">
-      <DependentUpon>Voetbal.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Boeking.cs">
-      <DependentUpon>Voetbal.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Club.cs">
-      <DependentUpon>Voetbal.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Klant.cs">
-      <DependentUpon>Voetbal.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stadion.cs">
-      <DependentUpon>Voetbal.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Vak.cs">
-      <DependentUpon>Voetbal.tt</DependentUpon>
-    </Compile>
     <Compile Include="Voetbal.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -138,12 +120,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Voetbal.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Wedstrijd.cs">
-      <DependentUpon>Voetbal.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ZitPlaats.cs">
-      <DependentUpon>Voetbal.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
