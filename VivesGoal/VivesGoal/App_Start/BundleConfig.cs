@@ -31,6 +31,16 @@ namespace VivesGoal
                       "~/Content/site.css",
                       "~/Content/jquery-ui.min.css"
                       ));
+
+            //DataTables           
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                "~/Scripts/DataTables/jquery.datatables.min.js", "~/Scripts/DataTables/datatables.bootstrap.min.js",
+                "~/Scripts/DataTables/datatables.responsive.min.js", "~/Scripts/DataTables/datetime-moment.js"));
+
+
+            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+                "~/Content/DataTables/css/dataTables.bootstrap.min.css",
+                "~/Content/DataTables/css/responsive.bootstrap.min.css"));
         }
     }
 }

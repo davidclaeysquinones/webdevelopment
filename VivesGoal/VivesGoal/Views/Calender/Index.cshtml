@@ -4,7 +4,8 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@Scripts.Render("~/bundles/datatables")
+@Styles.Render("~/Content/datatables")
 
 
 
@@ -52,110 +53,123 @@
     <input type="hidden" name="dateField1" id="dateField1" value="@ViewBag.Begindatum" />
     <input type="hidden" name="dateField2" id="dateField2" value="@ViewBag.EindDatum"/>
 
-    <script type="text/javascript">
+    @section scripts{
+        <script type="text/javascript">
 
-        window.onload = function () {
-            var currentDate1;
-            var currentDate2;
-            $(document).ready(function () {
+            window.onload = function() {
+                var currentDate1;
+                var currentDate2;
+                $(document).ready(function() {
 
-                $('#datepicker1').datepicker(
-                {
-                    dateFormat: "dd-mm-yy",
-                    firstDay: 1,
-                    onSelect: function () {
-                        currentDate1 = $("#datepicker1").datepicker("getDate");
-                        if (currentDate1 != null) {
-                            console.log(currentDate1);
-                            $('#dateField1').val(currentDate1);
-                            $("#datepicker2").datepicker('option', 'minDate', currentDate1);
-                            if (currentDate2 < currentDate1) {
-                                $('#datepicker2').datepicker("setDate", currentDate1);
+                   
+
+                    $('#datepicker1').datepicker(
+                    {
+                        dateFormat: "dd-mm-yy",
+                        firstDay: 1,
+                        onSelect: function() {
+                            currentDate1 = $("#datepicker1").datepicker("getDate");
+                            if (currentDate1 != null) {
+                                console.log(currentDate1);
+                                $('#dateField1').val(currentDate1);
+                                $("#datepicker2").datepicker('option', 'minDate', currentDate1);
+                                if (currentDate2 < currentDate1) {
+                                    $('#datepicker2').datepicker("setDate", currentDate1);
+                                }
                             }
                         }
-                    }
-                });
+                    });
 
-                $('#datepicker2').datepicker(
-                {
-                    dateFormat: "dd-mm-yy",
-                    firstDay: 1,
-                    onSelect: function () {
-                        currentDate2 = $("#datepicker2").datepicker("getDate");
-                        if (currentDate2 != null) {
-                            console.log(currentDate2);
+                    $('#datepicker2').datepicker(
+                    {
+                        dateFormat: "dd-mm-yy",
+                        firstDay: 1,
+                        onSelect: function() {
+                            currentDate2 = $("#datepicker2").datepicker("getDate");
+                            if (currentDate2 != null) {
+                                console.log(currentDate2);
 
-                            $('#dateField2').val(currentDate2);
-                            $("#datepicker1").datepicker('option', 'maxDate', currentDate2);
-                            if (currentDate1 > currentDate2) {
-                                $('#datepicker1').datepicker("setDate", currentDate2);
+                                $('#dateField2').val(currentDate2);
+                                $("#datepicker1").datepicker('option', 'maxDate', currentDate2);
+                                if (currentDate1 > currentDate2) {
+                                    $('#datepicker1').datepicker("setDate", currentDate2);
+                                }
                             }
                         }
+                    });
+
+                    if ($('#dateField1').val() != null) {
+                        $('#datepicker1').datepicker("setDate", new Date($('#dateField1').val()));
+                    } else {
+                        $('#datepicker1').datepicker("setDate", new Date());
                     }
+
+
+                    currentDate1 = $("#datepicker1").datepicker("getDate");
+                    $('#dateField1').val(currentDate1);
+
+                    if ($('#dateField2').val() != null) {
+                        $('#datepicker2').datepicker("setDate", new Date($('#dateField2').val()));
+                    } else {
+                        $('#datepicker2').datepicker("setDate", new Date());
+                    }
+
+
+                    currentDate2 = $("#datepicker2").datepicker("getDate");
+                    $('#dateField2').val(currentDate2);
+
+                    $("#datepicker1").datepicker('option', 'maxDate', currentDate2);
+                    $("#datepicker2").datepicker('option', 'minDate', currentDate1);
+
+                    $('#myTable').DataTable();
                 });
 
-                if ($('#dateField1').val() != null) {
-                    $('#datepicker1').datepicker("setDate", new Date($('#dateField1').val()));
-                } else {
-                    $('#datepicker1').datepicker("setDate", new Date());
-                }
-                
 
-                currentDate1 = $("#datepicker1").datepicker("getDate");
-                $('#dateField1').val(currentDate1);
-
-                if ($('#dateField2').val() != null) {
-                    $('#datepicker2').datepicker("setDate", new Date($('#dateField2').val()));
-                } else {
-                    $('#datepicker2').datepicker("setDate", new Date());
-                }
-        
- 
-                
-                currentDate2 = $("#datepicker2").datepicker("getDate");
-                $('#dateField2').val(currentDate2);
-
-                $("#datepicker1").datepicker('option', 'maxDate', currentDate2);
-                $("#datepicker2").datepicker('option', 'minDate', currentDate1);
-
-            });
-        }
+            }
 
 
-    </script>
+        </script>
+
+    }
+
 
 }
 
 
-<table class="table">
-    <tr>
-        <th>
-            datum
-        </th>
-        <th>
-            thuisploeg
-        </th>
-        <th>
-            bezoekers
-        </th>
-        <th></th>
-    </tr>
-    
-    @foreach (var item in Model)
-    {
+<table class="table" id="dataTable">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.datum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Club1.naam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Club.naam)
-            </td>
-
+            <th>
+                datum
+            </th>
+            <th>
+                thuisploeg
+            </th>
+            <th>
+                bezoekers
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Club1.naam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Club.naam)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+ 
 
 </table>
 
