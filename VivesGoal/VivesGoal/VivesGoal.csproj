@@ -440,6 +440,7 @@
     <Content Include="Views\Stadion\ListForm.cshtml" />
     <Content Include="Views\Calender\Index.cshtml" />
     <Content Include="Views\Stadion\Index.cshtml" />
+    <Content Include="Views\Shared\WedstrijdHistoriek.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

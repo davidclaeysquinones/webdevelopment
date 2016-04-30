@@ -77,12 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="Voetbal.edmx">
+    <EntityDeploy Include="VoetbalEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Voetbal.Designer.cs</LastGenOutput>
+      <LastGenOutput>VoetbalEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Voetbal.edmx.diagram">
-      <DependentUpon>Voetbal.edmx</DependentUpon>
+    <Content Include="VoetbalEntities.edmx.diagram">
+      <DependentUpon>VoetbalEntities.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -92,34 +92,70 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Voetbal.Context.tt">
+    <Content Include="VoetbalEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Voetbal.edmx</DependentUpon>
-      <LastGenOutput>Voetbal.Context.cs</LastGenOutput>
+      <DependentUpon>VoetbalEntities.edmx</DependentUpon>
+      <LastGenOutput>VoetbalEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Voetbal.tt">
+    <Content Include="VoetbalEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Voetbal.edmx</DependentUpon>
-      <LastGenOutput>Voetbal.cs</LastGenOutput>
+      <DependentUpon>VoetbalEntities.edmx</DependentUpon>
+      <LastGenOutput>VoetbalEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abonnement.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetRoles.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaims.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogins.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUsers.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Boeking.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Club.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Voetbal.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Voetbal.Context.tt</DependentUpon>
+    <Compile Include="Stadion.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Voetbal.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Voetbal.tt</DependentUpon>
+    <Compile Include="Vak.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Voetbal.Designer.cs">
+    <Compile Include="VoetbalEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Voetbal.edmx</DependentUpon>
+      <DependentUpon>VoetbalEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VoetbalEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VoetbalEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VoetbalEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Wedstrijd.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZitPlaats.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
