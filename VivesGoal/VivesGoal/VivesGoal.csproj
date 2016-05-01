@@ -178,6 +178,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StadionController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -442,6 +443,8 @@
     <Content Include="Views\Calender\Index.cshtml" />
     <Content Include="Views\Stadion\Index.cshtml" />
     <Content Include="Views\Shared\WedstrijdHistoriek.cshtml" />
+    <Content Include="Views\Ticket\Create.cshtml" />
+    <Content Include="Views\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
