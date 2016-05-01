@@ -28,7 +28,7 @@ namespace VivesGoal.Controllers
         {
 
             ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
-            IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.All();
+            IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.Get(DateTime.Now);
 
            
 
@@ -36,12 +36,14 @@ namespace VivesGoal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(int? id, string dateField1, string dateField2)
+        public ActionResult Index(int id, string dateField1, string dateField2)
         {
             if (id == null || dateField1 == null || dateField2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+
             DateTime date1;
             DateTime date2;
             try
@@ -54,6 +56,13 @@ namespace VivesGoal.Controllers
             catch (FormatException e)
             {
                 Trace.WriteLine(e.Message);
+                return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
+            }
+
+            DateTime current = DateTime.Now;
+
+            if (date1 < current)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
             }
 

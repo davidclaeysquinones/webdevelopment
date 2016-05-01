@@ -71,6 +71,7 @@
                 {
                     dateFormat: "dd-mm-yy",
                     firstDay: 1,
+                    minDate: new Date(),
                     onSelect: function() {
                         currentDate1 = $("#datepicker1").datepicker("getDate");
                         if (currentDate1 != null) {
@@ -182,10 +183,27 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Club1.naam)
+                    <img src="~/Content/Images/@item.Club1.logo" style="width: auto; height: auto;max-width: 50px; max-height: 50px;padding: 0px 40px 0px 0px;" id="@item.id-@item.Club1.naam"/>
+
+                    @*<div style="width: auto; height: auto;max-width: 50px; max-height: 50px" id="@item.id-@item.Club1.naam"></div>
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            $('#@item.id-@item.Club1.naam').css('background-image', 'url(~/Content/Images/@item.Club1.logo)');
+
+                        }
+                    </script>*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Club.naam)
+                    <img src="~/Content/Images/@item.Club.logo" style="width: auto; height: auto;max-width: 50px; max-height: 50px;padding: 0px 40px 0px 0px;" id="@item.id-@item.Club.naam" />
+                    @*<div style="width: auto; height: auto;max-width: 50px; max-height: 50px" id="@item.id-@item.Club.naam"></div>
+                    <script type="text/javascript">
+                        window.onload=function() {
+                            $('#@item.id-@item.Club.naam').css('background-image', 'url(~/Content/Images/@item.Club.logo)');
 
+                        }
+                    </script>*@
+                </td>
 
             </tr>
 

@@ -23,8 +23,12 @@ textarea {
     max-width: 280px;
 }
 
-.navbar.navbar-inverse.navbar-fixed-top {
+.navbar.navbar-inverse.navbar-fixed-top, .navbar-toggle {
     background-color: #0D590B;
+}
+
+.navbar-toggle :hover,.navbar-toggle :active ,.navbar-toggle:focus,.show.bs.collapse,.shown.bs.collapse     {
+    color: #46DE40;
 }
 
     .navbar.navbar-inverse.navbar-fixed-top a, .navbar.navbar-inverse.navbar-fixed-top button, .navbar.navbar-inverse.navbar-fixed-top li {
