@@ -16,5 +16,7 @@ namespace Voetbal.DAO
                 return db.ZitPlaats.ToList();
             }
         }
+
+
     }
 }

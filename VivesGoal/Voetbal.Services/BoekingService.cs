@@ -20,6 +20,11 @@ namespace Voetbal.Services
         {
             return boekingDAO.All();
         }
+
+        public IEnumerable<Boeking> BoekingenKlant(string id)
+        {
+            return boekingDAO.BoekingenKlant(id);
+        }
     }
 
 

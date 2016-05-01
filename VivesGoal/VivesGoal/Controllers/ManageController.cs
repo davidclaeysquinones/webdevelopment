@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,24 +7,30 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Model;
 using VivesGoal.Models;
+using Voetbal.Services;
 
 namespace VivesGoal.Controllers
 {
+  
     [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private BoekingService boekingService;
 
         public ManageController()
         {
+            boekingService = new BoekingService();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            boekingService=new BoekingService();
         }
 
         public ApplicationSignInManager SignInManager
@@ -72,6 +79,9 @@ namespace VivesGoal.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
+            IEnumerable<Boeking> boekingen = boekingService.BoekingenKlant(userId);
+            ViewBag.Boekingen = boekingen;
             return View(model);
         }
 
