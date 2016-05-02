@@ -25,6 +25,16 @@ namespace Voetbal.Services
         {
             return boekingDAO.BoekingenKlant(id);
         }
+
+        public Boeking get(int id)
+        {
+            return boekingDAO.Get(id);
+        }
+
+        public void Add(Boeking boeking)
+        {
+            boekingDAO.Add(boeking);
+        }
     }
 
 

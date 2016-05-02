@@ -36,5 +36,10 @@ namespace Voetbal.Services
         {
             return wedstrijdDAO.Get(clubid, date1, date2);
         }
+
+        public Wedstrijd GetWedstrijd(int id)
+        {
+            return wedstrijdDAO.GetWedstrijd(id);
+        }
     }
 }
