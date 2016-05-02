@@ -46,7 +46,7 @@ namespace Voetbal.DAO
         {
             using (var db = new VoetbalClubEntities())
             {
-                return db.Wedstrijd.Find(id);
+                return db.Wedstrijd.Where(w => w.id == id).Include(w => w.Club).Include(w => w.Club1).Single();
             }
         }
              

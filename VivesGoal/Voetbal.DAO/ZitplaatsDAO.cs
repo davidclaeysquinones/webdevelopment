@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using System.Data.Entity;
 
 namespace Voetbal.DAO
 {
@@ -13,10 +14,8 @@ namespace Voetbal.DAO
         {
             using (var db = new VoetbalClubEntities())
             {
-                return db.ZitPlaats.ToList();
+                return db.ZitPlaats.Include(z => z.Vak).ToList();
             }
         }
-
-
     }
 }

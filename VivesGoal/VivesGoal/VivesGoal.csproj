@@ -443,8 +443,8 @@
     <Content Include="Views\Calender\Index.cshtml" />
     <Content Include="Views\Stadion\Index.cshtml" />
     <Content Include="Views\Shared\WedstrijdHistoriek.cshtml" />
-    <Content Include="Views\Ticket\Create.cshtml" />
     <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\Ticket\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

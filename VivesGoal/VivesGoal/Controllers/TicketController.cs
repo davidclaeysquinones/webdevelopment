@@ -43,7 +43,10 @@ namespace VivesGoal.Controllers
             }
 
             vakService = new VakService();
-            ViewBag.VakNr = new SelectList(vakService.All(), "VakId", "VakNaam");
+            ViewBag.VakNr = new SelectList(vakService.All(), "id", "naam");
+
+            //zitplaatsService = new ZitplaatsService();
+            //ViewBag.ZitPlaats = new SelectList(zitplaatsService.All(), "ZitplaatsId","VakNaam");
 
             //var userId = User.Identity.GetUserId();
 
