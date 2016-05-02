@@ -1,0 +1,90 @@
+﻿@using System.Collections
+@using Model
+@using VivesGoal.ViewModel
+@model IEnumerable<Boeking>
+
+@Scripts.Render("~/bundles/datatables")
+@Styles.Render("~/Content/datatables")
+
+
+
+<table class="table" id="dataTable">
+    <thead>
+        <tr>
+            <th>
+                datum
+            </th>
+            <th>
+                wedstrijd
+            </th>
+            <th>
+                aantal
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            IList<WedstrijdHistoriekViewModel> boekingen = new List<WedstrijdHistoriekViewModel>();
+
+
+
+            IEnumerable<Boeking> sorted = Model.OrderBy(w => w.Wedstrijd);
+            int i = 0;
+            int aantal = 0;
+            int vorig = -1;
+            foreach (var item in sorted)
+            {
+                WedstrijdHistoriekViewModel wedstrijd = new WedstrijdHistoriekViewModel();
+                if (vorig == item.Wedstrijd)
+                {
+                    wedstrijd.datum = item.Wedstrijd1.datum.ToString("dd-MM-yyyy");
+                    wedstrijd.ploeg = item.Wedstrijd1.Club1.naam + " - " + item.Wedstrijd1.Club.naam;
+
+                    boekingen[boekingen.Count - 1] = wedstrijd;
+
+
+                    aantal++;
+                    wedstrijd.aantal = aantal;
+
+                }
+                else
+                {
+                    aantal = 1;
+                    wedstrijd.datum = item.Wedstrijd1.datum.ToString("dd-MM-yyyy");
+                    wedstrijd.aantal = aantal;
+                    wedstrijd.ploeg = item.Wedstrijd1.Club1.naam + " - " + item.Wedstrijd1.Club.naam;
+                    boekingen.Add(wedstrijd);
+
+                }
+                vorig = item.Wedstrijd;
+                i++;
+            }
+
+            IOrderedEnumerable<WedstrijdHistoriekViewModel> orderedByDate = boekingen.OrderBy(d => d.datum);
+        }
+
+
+
+        @foreach (WedstrijdHistoriekViewModel item in orderedByDate)
+        {
+            <tr class="wedstrijdrow">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.datum)
+                  
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ploeg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.aantal)
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+
+
+
+</table>

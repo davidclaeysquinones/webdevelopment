@@ -58,8 +58,7 @@ namespace VivesGoal.Controllers
                 Trace.WriteLine(e.Message);
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
             }
-
-            DateTime current = DateTime.Now;
+            DateTime current = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
 
             if (date1 < current)
             {

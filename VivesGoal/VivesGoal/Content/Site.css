@@ -23,7 +23,7 @@ textarea {
     max-width: 280px;
 }
 
-.navbar.navbar-inverse.navbar-fixed-top, .navbar-toggle {
+.navbar.navbar-inverse.navbar-fixed-top, .navbar-toggle,.navbar-default .navbar-toggle .icon-bar {
     background-color: #0D590B;
 }
 
