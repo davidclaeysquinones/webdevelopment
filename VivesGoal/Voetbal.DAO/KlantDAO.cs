@@ -16,5 +16,13 @@ namespace Voetbal.DAO
                 return db.AspNetUsers.ToList();
             }
         }
+
+        public AspNetUsers Get(string id)
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                return db.AspNetUsers.Find(id);
+            }
+        }
     }
 }

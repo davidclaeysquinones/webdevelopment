@@ -20,5 +20,10 @@ namespace Voetbal.Services
         {
             return klantDAO.All();
         }
+
+        public AspNetUsers Get(string id)
+        {
+            return klantDAO.Get(id);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Model;
 using Voetbal.Services;
 
@@ -15,6 +16,7 @@ namespace VivesGoal.Controllers
         private WedstrijdService wedstrijdService;
         private ZitplaatsService zitplaatsService;
         private VakService vakService;
+        private KlantService klantService;
         // GET: Ticket
         public ActionResult Index()
         {
@@ -48,8 +50,9 @@ namespace VivesGoal.Controllers
             //zitplaatsService = new ZitplaatsService();
             //ViewBag.ZitPlaats = new SelectList(zitplaatsService.All(), "ZitplaatsId","VakNaam");
 
-            //var userId = User.Identity.GetUserId();
-
+            var userId = User.Identity.GetUserId();
+            klantService = new KlantService();
+            ViewBag.klant = klantService.Get(userId);
 
 
 
@@ -57,20 +60,23 @@ namespace VivesGoal.Controllers
         }
 
         // POST: Ticket/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //public ActionResult Create([Bind(Include = "userId,,id")] Boeking entity, string userId)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            boekingService = new BoekingService();
+        //            boekingService.Add(entity);
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: Ticket/Edit/5
         public ActionResult Edit(int id)

@@ -17,26 +17,30 @@
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
+            @Html.Label("Klant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.klant.Email
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.datum, "Datum", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.datum, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.datum, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.datum)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Club1, "Thuisploeg", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Club1.naam, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Club1, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.Club1.naam)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Club, "Bezoekers", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Club.naam, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Club.naam, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.Club.naam)
             </div>
         </div>
 
@@ -54,6 +58,8 @@
         </div>
 
     </div>
+
+    string userId = @ViewBag.klant.Id;
 }
 
 
