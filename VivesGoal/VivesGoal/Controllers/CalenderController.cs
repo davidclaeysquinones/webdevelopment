@@ -26,11 +26,14 @@ namespace VivesGoal.Controllers
         // GET: Calender
         public ActionResult Index()
         {
+            List<SelectListItem> items = new SelectList(clubService.All(), "id", "naam").ToList();
+            items.Insert(0, (new SelectListItem { Text = "Alle", Value = "-1" }));
 
-            ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
-            IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.Get(DateTime.Now);
+            //ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
+            ViewBag.ClubId = items;
+            IEnumerable <Wedstrijd> wedstrijden = wedstrijdService.Get(DateTime.Now);
+            
 
-           
 
             return View(wedstrijden);
         }
@@ -75,8 +78,30 @@ namespace VivesGoal.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
             }
 
-            IEnumerable<Wedstrijd> wedstrijden = wedstrijdService.Get(Convert.ToInt16(id), date1, date2);
-            ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
+        
+            IEnumerable<Wedstrijd> wedstrijden;
+            if (id == -1)
+            {
+                wedstrijden = wedstrijdService.All();
+            }
+            else
+            {
+                if (id > 0)
+                {
+                    wedstrijden = wedstrijdService.Get(Convert.ToInt16(id), date1, date2);
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
+                }
+                
+            }
+
+            List<SelectListItem> items = new SelectList(clubService.All(), "id", "naam").ToList();
+            items.Insert(0, (new SelectListItem { Text = "Alle", Value = "-1" }));
+
+            //ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
+            ViewBag.ClubId = items;
             ViewBag.Begindatum = dateField1;
             ViewBag.EindDatum = dateField2;
 
