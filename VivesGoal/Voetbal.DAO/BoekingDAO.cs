@@ -24,6 +24,24 @@ namespace Voetbal.DAO
             {
                 return db.Boeking.Where(b => b.klant == id).Include( b =>b.Wedstrijd1.Club).Include(b=> b.Wedstrijd1.Club1).Include(b=> b.Wedstrijd1).ToList();
             }
-        } 
+        }
+        
+        public Boeking Get(int id)
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                return db.Boeking.Find(id);
+            }
+        }
+
+        public void Add(Boeking boeking)
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                //db.Bierens.Attach(entity);
+                db.Entry(boeking).State = EntityState.Added;
+                db.SaveChanges();
+            }
+        }
     }
 }

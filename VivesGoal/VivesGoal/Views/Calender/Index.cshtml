@@ -30,10 +30,10 @@
             <div class="col-sm-3 col-md-4">
                 Selecteer een tijdspanne
                 <p>
-                    begindatum : <input type="text" id="datepicker1">
+                    Begindatum : <input type="text" id="datepicker1">
                 </p>
                 <p>
-                    eindatum   : <input type="text" id="datepicker2">
+                    Eindatum   : <input type="text" id="datepicker2">
                 </p>
 
             </div>
@@ -163,14 +163,15 @@
     <thead>
         <tr>
             <th>
-                datum
+                Datum
             </th>
             <th>
-                thuisploeg
+                Thuisploeg
             </th>
             <th>
-                bezoekers
+                Bezoekers
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -204,6 +205,9 @@
 
                         }
                     </script>*@
+                </td>
+                <td>
+                    @Html.ActionLink("Ticket(s) kopen", "Create", "Ticket", new { id = item.id }, null)
                 </td>
 
             </tr>

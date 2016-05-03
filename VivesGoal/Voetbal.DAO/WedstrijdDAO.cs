@@ -41,6 +41,14 @@ namespace Voetbal.DAO
                 return db.Wedstrijd.Where(w => (w.bezoekers == clubid || w.thuisploeg == clubid) && (w.datum >=date1 && w.datum<=date2)).Include(w=> w.Club).Include(w=> w.Club1).ToList();
             }
         }
+
+        public Wedstrijd GetWedstrijd(int id)
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                return db.Wedstrijd.Where(w => w.id == id).Include(w => w.Club).Include(w => w.Club1).Single();
+            }
+        }
              
     }
 }
