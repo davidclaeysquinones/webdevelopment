@@ -79,16 +79,28 @@ namespace VivesGoal.Controllers
             }
 
         
-            IEnumerable<Wedstrijd> wedstrijden;
+            List<Wedstrijd> wedstrijden = new List<Wedstrijd>() ;
             if (id == -1)
             {
-                wedstrijden = wedstrijdService.All();
+                List<Club> clubs = clubService.All().ToList();
+                foreach (Club item in clubs)
+                {
+                    List<Wedstrijd> temp = wedstrijdService.Get(item.id, date1, date2).ToList();
+                    foreach (var wedstrijd in temp)
+                    {
+                        if (!wedstrijden.Contains(wedstrijd))
+                        {
+                           wedstrijden.Add(wedstrijd);
+                        }
+                    }
+                }
+               
             }
             else
             {
                 if (id > 0)
                 {
-                    wedstrijden = wedstrijdService.Get(Convert.ToInt16(id), date1, date2);
+                    wedstrijden = wedstrijdService.Get(Convert.ToInt16(id), date1, date2).ToList();
                 }
                 else
                 {

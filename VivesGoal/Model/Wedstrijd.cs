@@ -7,12 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Wedstrijd
+    public partial class Wedstrijd :IEquatable<Wedstrijd>
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Wedstrijd()
@@ -21,6 +23,7 @@ namespace Model
         }
     
         public int id { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime datum { get; set; }
         public int thuisploeg { get; set; }
         public int bezoekers { get; set; }
@@ -29,5 +32,12 @@ namespace Model
         public virtual ICollection<Boeking> Boeking { get; set; }
         public virtual Club Club { get; set; }
         public virtual Club Club1 { get; set; }
+        public bool Equals(Wedstrijd other)
+        {
+            return datum.Equals(other.datum)
+                   && thuisploeg == other.thuisploeg
+                   && bezoekers == other.bezoekers
+                   && id == other.id;
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Voetbal.DAO
         {
             using (var db = new VoetbalClubEntities())
             {
-                return db.Wedstrijd.Include(w => w.Club).Include(w => w.Club1).ToList();
+                return db.Wedstrijd.OrderBy(w => w.datum).Include(w => w.Club).Include(w => w.Club1).ToList();
             }
         }
 
@@ -22,7 +22,7 @@ namespace Voetbal.DAO
         {
             using (var db = new VoetbalClubEntities())
             {
-                return db.Wedstrijd.Where(w => w.datum >= date).Include( w => w.Club).Include(w => w.Club1).ToList();
+                return db.Wedstrijd.Where(w => w.datum >= date).OrderBy(w => w.datum).Include( w => w.Club).Include(w => w.Club1).ToList();
             }
         }
 
