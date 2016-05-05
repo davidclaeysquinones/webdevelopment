@@ -132,7 +132,7 @@
                         "sProcessing": "Bezig...",
                         "sLengthMenu": "_MENU_ resultaten weergeven",
                         "sZeroRecords": "Geen data om weer te geven",
-                        "sInfo": "_START_ van _TOTAL_ elementen weergegeven",
+                        "sInfo": "_END_  van _TOTAL_ elementen weergegeven",
                         "sInfoEmpty": "Geen data om weer te geven",
                         "sInfoFiltered": " (gefilterd uit _MAX_ regels)",
                         "sInfoPostFix": "",
@@ -145,7 +145,11 @@
                             "sLast": "Laatste pagina",
                             "sNext": "Volgende pagina",
                             "sPrevious": "Vorige pagina"
-                        }
+                        },
+                        aoColumnDefs: [
+                         { 'bSortable': false, 'aTargets': [1] }
+                        ]
+
                     }
                 });
             });
@@ -171,7 +175,7 @@
             <th>
                 Bezoekers
             </th>
-            <th></th>
+    
         </tr>
     </thead>
     <tbody>
@@ -182,6 +186,8 @@
 
                 <td>
                     @Html.DisplayFor(modelItem => item.datum)
+                    <br/>
+                    @Html.ActionLink("Ticket(s) kopen", "Create", "Ticket", new { wedstrijdId = item.id }, null)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Club1.naam)
@@ -205,9 +211,6 @@
 
                         }
                     </script>*@
-                </td>
-                <td>
-                    @Html.ActionLink("Ticket(s) kopen", "Create", "Ticket", new { id = item.id }, null)
                 </td>
 
             </tr>

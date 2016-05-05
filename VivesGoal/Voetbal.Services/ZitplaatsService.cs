@@ -20,5 +20,10 @@ namespace Voetbal.Services
         {
             return zitplaatsDAO.All();
         }
+
+        public ZitPlaats GetAvailable(int wedstijdId, int vakId)
+        {
+            return zitplaatsDAO.GetAvailable(wedstijdId, vakId);
+        }
     }
 }
