@@ -22,7 +22,7 @@ namespace Voetbal.DAO
         {
             using (var db = new VoetbalClubEntities())
             {
-                var exceptionList = db.Boeking.Where(b => b.ZitPlaats1.vak_id == vakId && b.Wedstrijd == wedstijdId).Select(b =>b.zitplaats).ToList();
+                var exceptionList = db.Boeking.Where(b => b.ZitPlaats1.vak_id == vakId && b.Wedstrijd == wedstijdId).Select(b =>b.ZitPlaats1.id).ToList();
 
                 var wedstrijd = db.Wedstrijd.Find(wedstijdId);
                 var mogelijk = db.ZitPlaats.Where(z => z.Stadion1.id ==wedstrijd.Club1.Stadion.id).Select(z => z.id).ToList();
