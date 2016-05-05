@@ -15,7 +15,7 @@ namespace VivesGoal.Controllers
         private StadionService stadionService;
         public StadionController()
         {
-            stadionService = new StadionService();
+            
         }
 
         // GET: Stadion
@@ -26,6 +26,7 @@ namespace VivesGoal.Controllers
 
         public ActionResult ListForm()
         {
+            stadionService = new StadionService();
             ViewBag.StadionId = new SelectList(stadionService.All(),"id","naam");
 
             return View(stadionService.All());
@@ -38,6 +39,7 @@ namespace VivesGoal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            stadionService = new StadionService();
             ViewBag.StadionId = new SelectList(stadionService.All(), "id", "naam");
 
             var stadion = stadionService.Get(Convert.ToInt32(stadionId));

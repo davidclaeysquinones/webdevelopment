@@ -35,6 +35,11 @@ namespace Voetbal.Services
         {
             boekingDAO.Add(boeking);
         }
+
+        public bool Exists(Boeking boeking)
+        {
+            return boekingDAO.Exists(boeking);
+        }
     }
 
 

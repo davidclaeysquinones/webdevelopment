@@ -19,18 +19,20 @@ namespace VivesGoal.Controllers
 
         public CalenderController()
         {
-            wedstrijdService = new WedstrijdService();
-            clubService = new ClubService();
+           
         }
 
         // GET: Calender
         public ActionResult Index()
         {
+           
+            clubService = new ClubService();
             List<SelectListItem> items = new SelectList(clubService.All(), "id", "naam").ToList();
             items.Insert(0, (new SelectListItem { Text = "Alle", Value = "-1" }));
 
             //ViewBag.ClubId = new SelectList(clubService.All(), "id", "naam");
             ViewBag.ClubId = items;
+            wedstrijdService = new WedstrijdService();
             IEnumerable <Wedstrijd> wedstrijden = wedstrijdService.Get(DateTime.Now);
             
 

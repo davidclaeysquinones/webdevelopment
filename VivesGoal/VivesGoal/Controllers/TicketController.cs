@@ -55,28 +55,13 @@ namespace VivesGoal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
             }
-           
+
         }
 
 
         [HttpPost]
         public ActionResult Create(int wedstrijdId, int vakId)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-
-                    // return RedirectToAction("Index");
-                }
-
-
-            }
-            catch (DataException ex)
-            {
-                ModelState.AddModelError("", "administrator");
-
-            }
 
             vakService = new VakService();
             ViewBag.VakNr = new SelectList(vakService.All(), "id", "naam");
@@ -86,20 +71,40 @@ namespace VivesGoal.Controllers
             ViewBag.klant = klantService.Get(userId);
 
             ZitplaatsService zitplaatsService = new ZitplaatsService();
-            ViewBag.Zitplaats = zitplaatsService.GetAvailable(wedstrijdId, vakId);
+            ZitPlaats zitPlaats = zitplaatsService.GetAvailable(wedstrijdId, vakId);
 
             wedstrijdService = new WedstrijdService();
             Wedstrijd wedstrijd = wedstrijdService.GetWedstrijd(Convert.ToInt32(wedstrijdId));
 
+         
+
             if (wedstrijd.datum <= DateTime.Now.AddDays(30))
             {
-                return View(wedstrijd);
-            }
+                Boeking boeking = new Boeking();
+                boeking.Wedstrijd = wedstrijdId;
+                boeking.zitplaats = zitPlaats.id;
+                boeking.klant = userId;
+
+                boekingService = new BoekingService();
+
+                try
+                {
+                    boekingService.Add(boeking);
+                }
+                catch (Exception )
+                {
+
+                    return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+                }
+                    
+                }
+               
             else
             {
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
             }
-        }
 
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -43,5 +43,16 @@ namespace Voetbal.DAO
                 db.SaveChanges();
             }
         }
+
+        public bool Exists(Boeking boeking)
+        {
+            
+            using (var db = new VoetbalClubEntities())
+            {
+                Boeking a = db.Boeking.Where(b=> b.klant==boeking.klant && b.Wedstrijd==boeking.Wedstrijd && b.zitplaats==boeking.zitplaats).FirstOrDefault();
+
+                return a != null;
+            }
+        }
     }
 }
