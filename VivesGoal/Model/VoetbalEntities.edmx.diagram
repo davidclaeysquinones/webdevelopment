@@ -31,6 +31,8 @@
         <AssociationConnector Association="VoetbalClubModel.FKZitPlaats951413" ManuallyRouted="false" />
         <AssociationConnector Association="VoetbalClubModel.vak_behoort_tot_zitplaats" ManuallyRouted="false" />
         <AssociationConnector Association="VoetbalClubModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VoetbalClubModel.PrijsVak" Width="1.5" PointX="0.75" PointY="14.875" />
+        <AssociationConnector Association="VoetbalClubModel.vak_heeft_als_prijs" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -56,7 +56,7 @@ namespace VivesGoal.Controllers
                 date2 = DateTime.ParseExact(Convert.ToString(dateField2).Substring(0, 15), "ddd MMM dd yyyy",
                     System.Globalization.CultureInfo.InvariantCulture);
             }
-            catch (FormatException e)
+            catch (Exception e)
             {
                 Trace.WriteLine(e.Message);
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);

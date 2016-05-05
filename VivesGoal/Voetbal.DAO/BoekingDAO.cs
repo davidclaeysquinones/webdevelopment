@@ -22,7 +22,7 @@ namespace Voetbal.DAO
         {
             using (var db = new VoetbalClubEntities())
             {
-                return db.Boeking.Where(b => b.klant == id).Include( b =>b.Wedstrijd1.Club).Include(b=> b.Wedstrijd1.Club1).Include(b=> b.Wedstrijd1).ToList();
+                return db.Boeking.Where(b => b.klant == id).Include( b =>b.Wedstrijd1.Club).Include(b=> b.Wedstrijd1.Club1).Include(b=> b.Wedstrijd1).Include( b=> b.ZitPlaats1.Vak.PrijsVak).ToList();
             }
         }
         

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VoetbalClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="VoetbalClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -95,6 +95,13 @@
           <Property Name="naam" Type="varchar" MaxLength="30" />
           <Property Name="logo" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="PrijsVak">
+          <Key>
+            <PropertyRef Name="vak" />
+          </Key>
+          <Property Name="vak" Type="int" Nullable="false" />
+          <Property Name="prijs" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="Stadion">
           <Key>
             <PropertyRef Name="id" />
@@ -126,6 +133,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="vak id" Type="int" Nullable="false" />
           <Property Name="stadion" Type="int" Nullable="false" />
+          <Property Name="bezet" Type="tinyint" Nullable="false" />
         </EntityType>
         <Association Name="Abonnement heeft als club">
           <End Role="Club" Type="Self.Club" Multiplicity="1" />
@@ -315,6 +323,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="vak heeft als prijs">
+          <End Role="PrijsVak" Type="Self.PrijsVak" Multiplicity="1" />
+          <End Role="Vak" Type="Self.Vak" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PrijsVak">
+              <PropertyRef Name="vak" />
+            </Principal>
+            <Dependent Role="Vak">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="VoetbalClubModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
@@ -325,6 +345,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Boeking" EntityType="Self.Boeking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrijsVak" EntityType="Self.PrijsVak" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stadion" EntityType="Self.Stadion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vak" EntityType="Self.Vak" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wedstrijd" EntityType="Self.Wedstrijd" Schema="dbo" store:Type="Tables" />
@@ -389,9 +410,12 @@
             <End Role="Vak" EntitySet="Vak" />
             <End Role="ZitPlaats" EntitySet="ZitPlaats" />
           </AssociationSet>
+          <AssociationSet Name="vak heeft als prijs" Association="Self.vak heeft als prijs">
+            <End Role="PrijsVak" EntitySet="PrijsVak" />
+            <End Role="Vak" EntitySet="Vak" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VoetbalClubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -512,6 +536,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ZitPlaats" Relationship="Self.vak_behoort_tot_zitplaats" FromRole="Vak" ToRole="ZitPlaats" />
+          <NavigationProperty Name="PrijsVak" Relationship="VoetbalClubModel.vak_heeft_als_prijs" FromRole="Vak" ToRole="PrijsVak" />
         </EntityType>
         <EntityType Name="Wedstrijd">
           <Key>
@@ -536,6 +561,7 @@
           <NavigationProperty Name="Boeking" Relationship="Self.boeking_heeft_als_zitplaats" FromRole="ZitPlaats" ToRole="Boeking" />
           <NavigationProperty Name="Stadion1" Relationship="Self.FKZitPlaats951413" FromRole="ZitPlaats" ToRole="Stadion" />
           <NavigationProperty Name="Vak" Relationship="Self.vak_behoort_tot_zitplaats" FromRole="ZitPlaats" ToRole="Vak" />
+          <Property Name="bezet" Type="Byte" Nullable="false" />
         </EntityType>
         <Association Name="Abonnement_heeft_als_club">
           <End Role="Club" Type="Self.Club" Multiplicity="1" />
@@ -770,7 +796,32 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="PrijsVak" EntityType="VoetbalClubModel.PrijsVak" />
+          <AssociationSet Name="vak_heeft_als_prijs" Association="VoetbalClubModel.vak_heeft_als_prijs">
+            <End Role="PrijsVak" EntitySet="PrijsVak" />
+            <End Role="Vak" EntitySet="Vak" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PrijsVak">
+          <Key>
+            <PropertyRef Name="vak" />
+          </Key>
+          <Property Name="vak" Type="Int32" Nullable="false" />
+          <Property Name="prijs" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Vak1" Relationship="VoetbalClubModel.vak_heeft_als_prijs" FromRole="PrijsVak" ToRole="Vak" />
+        </EntityType>
+        <Association Name="vak_heeft_als_prijs">
+          <End Type="VoetbalClubModel.PrijsVak" Role="PrijsVak" Multiplicity="1" />
+          <End Type="VoetbalClubModel.Vak" Role="Vak" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PrijsVak">
+              <PropertyRef Name="vak" />
+            </Principal>
+            <Dependent Role="Vak">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -890,6 +941,7 @@
           <EntitySetMapping Name="ZitPlaats">
             <EntityTypeMapping TypeName="VoetbalClubModel.ZitPlaats">
               <MappingFragment StoreEntitySet="ZitPlaats">
+                <ScalarProperty Name="bezet" ColumnName="bezet" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="vak_id" ColumnName="vak id" />
                 <ScalarProperty Name="stadion" ColumnName="stadion" />
@@ -904,6 +956,14 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="PrijsVak">
+            <EntityTypeMapping TypeName="VoetbalClubModel.PrijsVak">
+              <MappingFragment StoreEntitySet="PrijsVak">
+                <ScalarProperty Name="prijs" ColumnName="prijs" />
+                <ScalarProperty Name="vak" ColumnName="vak" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

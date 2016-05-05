@@ -24,6 +24,7 @@ namespace Model
         public int id { get; set; }
         public int vak_id { get; set; }
         public int stadion { get; set; }
+        public byte bezet { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Abonnement> Abonnement { get; set; }

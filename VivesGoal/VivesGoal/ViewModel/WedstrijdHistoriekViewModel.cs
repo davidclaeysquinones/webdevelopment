@@ -12,5 +12,7 @@ namespace VivesGoal.ViewModel
         public string ploeg { get; set; }
 
         public int aantal { get; set; }
+
+        public double prijs { get; set; }
     };
 }

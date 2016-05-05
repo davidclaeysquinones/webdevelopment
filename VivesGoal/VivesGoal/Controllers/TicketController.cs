@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -46,8 +47,15 @@ namespace VivesGoal.Controllers
             ViewBag.klant = klantService.Get(userId);
 
 
-
-            return View(wedstrijd);
+            if (wedstrijd.datum <= DateTime.Now.AddDays(30))
+            {
+                return View(wedstrijd);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
+            }
+           
         }
 
 
@@ -83,7 +91,14 @@ namespace VivesGoal.Controllers
             wedstrijdService = new WedstrijdService();
             Wedstrijd wedstrijd = wedstrijdService.GetWedstrijd(Convert.ToInt32(wedstrijdId));
 
-            return View(wedstrijd);
+            if (wedstrijd.datum <= DateTime.Now.AddDays(30))
+            {
+                return View(wedstrijd);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
+            }
         }
 
     }

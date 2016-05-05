@@ -187,7 +187,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.datum)
                     <br/>
-                    @Html.ActionLink("Ticket(s) kopen", "Create", "Ticket", new { wedstrijdId = item.id }, null)
+                    @if (item.datum <= DateTime.Now.AddDays(30))
+                    {
+                        @Html.ActionLink("Ticket(s) kopen", "Create", "Ticket", new { wedstrijdId = item.id }, null)
+                    }
+    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Club1.naam)

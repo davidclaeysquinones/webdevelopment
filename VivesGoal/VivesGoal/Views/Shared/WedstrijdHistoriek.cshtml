@@ -20,6 +20,9 @@
             <th>
                 aantal
             </th>
+            <td>
+                prijs
+            </td>
         </tr>
     </thead>
     <tbody>
@@ -32,14 +35,15 @@
             int i = 0;
             int aantal = 0;
             int vorig = -1;
+            double vorigePrijs = 0;
             foreach (var item in sorted)
             {
                 WedstrijdHistoriekViewModel wedstrijd = new WedstrijdHistoriekViewModel();
-                if (vorig == item.Wedstrijd)
+                if (vorig == item.Wedstrijd && vorigePrijs==item.ZitPlaats1.Vak.PrijsVak.prijs)
                 {
                     wedstrijd.datum = item.Wedstrijd1.datum.ToString("dd-MM-yyyy");
                     wedstrijd.ploeg = item.Wedstrijd1.Club1.naam + " - " + item.Wedstrijd1.Club.naam;
-
+                    wedstrijd.prijs = Convert.ToDouble(item.ZitPlaats1.Vak.PrijsVak.prijs);
                     boekingen[boekingen.Count - 1] = wedstrijd;
 
 
@@ -53,10 +57,12 @@
                     wedstrijd.datum = item.Wedstrijd1.datum.ToString("dd-MM-yyyy");
                     wedstrijd.aantal = aantal;
                     wedstrijd.ploeg = item.Wedstrijd1.Club1.naam + " - " + item.Wedstrijd1.Club.naam;
+                    wedstrijd.prijs = Convert.ToDouble(item.ZitPlaats1.Vak.PrijsVak.prijs);
                     boekingen.Add(wedstrijd);
 
                 }
                 vorig = item.Wedstrijd;
+                vorigePrijs = Convert.ToDouble(item.ZitPlaats1.Vak.PrijsVak.prijs);
                 i++;
             }
 
@@ -78,6 +84,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.aantal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prijs)
                 </td>
 
             </tr>

@@ -37,5 +37,6 @@ namespace Model
         public virtual DbSet<Vak> Vak { get; set; }
         public virtual DbSet<Wedstrijd> Wedstrijd { get; set; }
         public virtual DbSet<ZitPlaats> ZitPlaats { get; set; }
+        public virtual DbSet<PrijsVak> PrijsVak { get; set; }
     }
 }

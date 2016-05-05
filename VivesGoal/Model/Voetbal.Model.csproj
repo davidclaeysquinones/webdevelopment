@@ -129,6 +129,9 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>VoetbalEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="PrijsVak.cs">
+      <DependentUpon>VoetbalEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stadion.cs">
       <DependentUpon>VoetbalEntities.tt</DependentUpon>
