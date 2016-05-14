@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="efed9d97e07546c9839dd84b5a18a983" Name="Diagram1">
-        <EntityTypeShape EntityType="VoetbalClubModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="4.125" IsExpanded="true" />
+      <Diagram DiagramId="f3b40e3c74234ba2b9f7374e05741eb6" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="VoetbalClubModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="VoetbalClubModel.Abonnement" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="VoetbalClubModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VoetbalClubModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="VoetbalClubModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="VoetbalClubModel.AspNetUsers" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VoetbalClubModel.Boeking" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="VoetbalClubModel.Club" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="VoetbalClubModel.Stadion" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoetbalClubModel.Boeking" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoetbalClubModel.Club" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoetbalClubModel.Stadion" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="VoetbalClubModel.Vak" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VoetbalClubModel.Wedstrijd" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VoetbalClubModel.ZitPlaats" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoetbalClubModel.ZitPlaats" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
         <AssociationConnector Association="VoetbalClubModel.Abonnement_heeft_als_club" ManuallyRouted="false" />
         <AssociationConnector Association="VoetbalClubModel.Abonnement_heeft_als_zitplaats" ManuallyRouted="false" />
         <AssociationConnector Association="VoetbalClubModel.klant_heeft_abonnement" ManuallyRouted="false" />
@@ -31,8 +31,6 @@
         <AssociationConnector Association="VoetbalClubModel.FKZitPlaats951413" ManuallyRouted="false" />
         <AssociationConnector Association="VoetbalClubModel.vak_behoort_tot_zitplaats" ManuallyRouted="false" />
         <AssociationConnector Association="VoetbalClubModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="VoetbalClubModel.PrijsVak" Width="1.5" PointX="0.75" PointY="14.875" />
-        <AssociationConnector Association="VoetbalClubModel.vak_heeft_als_prijs" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

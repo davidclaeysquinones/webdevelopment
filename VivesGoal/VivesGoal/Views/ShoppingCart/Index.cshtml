@@ -1,0 +1,61 @@
+﻿@using Model
+@{
+    ViewBag.Title = "Shopping Cart";
+    Cart cart = (Cart)Session["items"];
+}
+
+
+<h3>
+    <em>Review</em> your cart:
+</h3>
+<p class="button">
+
+</p>
+<div id="update-message">
+</div>
+<table>
+    <tr>
+        <th>
+            Wedstrijd
+        </th>
+        <th>
+            Vak
+        </th>
+        <th>
+            Aantal
+        </th>
+        <th>Prijs</th>
+    </tr>
+    @{
+        int total = 0;
+        if (cart != null)
+        {
+            foreach (var item in cart.Items)
+            {
+                <tr>
+                    <td>
+                        @item.wedstrijd
+                    </td>
+                    <td>
+                        @item.vakNaam
+                    </td>
+                    <td>
+                        @item.aantal
+                    </td>
+                    <td>
+                        @item.prijs
+                    </td>
+                </tr>
+                { total += Convert.ToInt32(item.prijs) * item.aantal; };
+            }
+        }
+
+    }
+   
+    <tr>
+        <td>
+            Total : @total
+        </td>
+     
+    </tr>
+</table>

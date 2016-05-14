@@ -84,18 +84,18 @@ namespace VivesGoal.Controllers
                 boeking.Wedstrijd = wedstrijdId;
                 boeking.zitplaats = zitPlaats.id;
                 boeking.klant = userId;
-
+                
                 boekingService = new BoekingService();
 
-                try
-                {
+                //try
+                //{
                     boekingService.Add(boeking);
-                }
-                catch (Exception )
-                {
+                //}
+                //catch (Exception )
+                //{
 
-                    return new HttpStatusCodeResult(HttpStatusCode.Conflict);
-                }
+                //    return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+                //}
                     
                 }
                
@@ -106,5 +106,6 @@ namespace VivesGoal.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

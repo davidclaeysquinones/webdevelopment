@@ -26,11 +26,11 @@ namespace Voetbal.DAO
             }
         }
 
-        public IEnumerable<Wedstrijd> Get(int clubid)
+        public Wedstrijd Get(int wedstrijdId)
         {
             using (var db = new VoetbalClubEntities())
             {
-                return db.Wedstrijd.Where(w => w.bezoekers == clubid || w.thuisploeg == clubid).Include(w => w.Club).Include(w => w.Club1).ToList();
+                return db.Wedstrijd.Include( w=> w.Club1).Include(w => w.Club).Where(w => w.id == wedstrijdId).FirstOrDefault();
             }
         }
 

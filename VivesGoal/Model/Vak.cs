@@ -22,9 +22,9 @@ namespace Model
     
         public int id { get; set; }
         public string naam { get; set; }
+        public string prijs { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ZitPlaats> ZitPlaats { get; set; }
-        public virtual PrijsVak PrijsVak { get; set; }
     }
 }

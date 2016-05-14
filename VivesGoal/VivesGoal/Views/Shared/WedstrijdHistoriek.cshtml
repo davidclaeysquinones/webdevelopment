@@ -39,11 +39,11 @@
             foreach (var item in sorted)
             {
                 WedstrijdHistoriekViewModel wedstrijd = new WedstrijdHistoriekViewModel();
-                if (vorig == item.Wedstrijd && vorigePrijs==item.ZitPlaats1.Vak.PrijsVak.prijs)
+                if (vorig == item.Wedstrijd && vorigePrijs==Convert.ToDouble(item.ZitPlaats1.Vak.prijs))
                 {
                     wedstrijd.datum = item.Wedstrijd1.datum.ToString("dd-MM-yyyy");
                     wedstrijd.ploeg = item.Wedstrijd1.Club1.naam + " - " + item.Wedstrijd1.Club.naam;
-                    wedstrijd.prijs = Convert.ToDouble(item.ZitPlaats1.Vak.PrijsVak.prijs);
+                    wedstrijd.prijs = Convert.ToDouble(item.ZitPlaats1.Vak.prijs);
                     boekingen[boekingen.Count - 1] = wedstrijd;
 
 
@@ -57,12 +57,12 @@
                     wedstrijd.datum = item.Wedstrijd1.datum.ToString("dd-MM-yyyy");
                     wedstrijd.aantal = aantal;
                     wedstrijd.ploeg = item.Wedstrijd1.Club1.naam + " - " + item.Wedstrijd1.Club.naam;
-                    wedstrijd.prijs = Convert.ToDouble(item.ZitPlaats1.Vak.PrijsVak.prijs);
+                    wedstrijd.prijs = Convert.ToDouble(item.ZitPlaats1.Vak.prijs);
                     boekingen.Add(wedstrijd);
 
                 }
                 vorig = item.Wedstrijd;
-                vorigePrijs = Convert.ToDouble(item.ZitPlaats1.Vak.PrijsVak.prijs);
+                vorigePrijs = Convert.ToDouble(item.ZitPlaats1.Vak.prijs);
                 i++;
             }
 

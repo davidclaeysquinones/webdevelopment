@@ -20,5 +20,10 @@ namespace Voetbal.Services
         {
             return vakDAO.All();
         }
+
+        public Vak Get(int id)
+        {
+            return vakDAO.Get(id);
+        }
     }
 }

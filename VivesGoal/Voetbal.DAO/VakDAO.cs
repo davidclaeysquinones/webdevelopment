@@ -16,5 +16,13 @@ namespace Voetbal.DAO
                 return db.Vak.ToList();
             }
         }
+
+        public Vak Get(int id)
+        {
+            using ( var db = new VoetbalClubEntities())
+            {
+                return db.Vak.Find(id);
+            }
+        }
     }
 }

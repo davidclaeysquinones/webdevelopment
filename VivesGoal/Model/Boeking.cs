@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Model
 {
     using System;
@@ -17,6 +19,8 @@ namespace Model
         public string klant { get; set; }
         public int zitplaats { get; set; }
         public int Wedstrijd { get; set; }
+        
+        public int id { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Wedstrijd Wedstrijd1 { get; set; }

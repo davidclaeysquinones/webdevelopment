@@ -14,7 +14,7 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Wedstrijd :IEquatable<Wedstrijd>
+    public partial class Wedstrijd
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Wedstrijd()
@@ -32,12 +32,5 @@ namespace Model
         public virtual ICollection<Boeking> Boeking { get; set; }
         public virtual Club Club { get; set; }
         public virtual Club Club1 { get; set; }
-        public bool Equals(Wedstrijd other)
-        {
-            return datum.Equals(other.datum)
-                   && thuisploeg == other.thuisploeg
-                   && bezoekers == other.bezoekers
-                   && id == other.id;
-        }
     }
 }

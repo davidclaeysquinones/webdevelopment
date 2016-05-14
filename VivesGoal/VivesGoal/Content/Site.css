@@ -23,7 +23,7 @@ textarea {
     max-width: 280px;
 }
 
-.navbar.navbar-inverse.navbar-fixed-top, .navbar-toggle,.navbar-default .navbar-toggle .icon-bar {
+.navbar.navbar-inverse.navbar-fixed-top, .navbar-toggle,.navbar-default .navbar-toggle .icon-bar,#shoppingcart a.dropdown-toggle,#shoppingcart .dropdown-menu.dropdown-cart{
     background-color: #0D590B;
 }
 
@@ -31,12 +31,12 @@ textarea {
     color: #46DE40;
 }
 
-    .navbar.navbar-inverse.navbar-fixed-top a, .navbar.navbar-inverse.navbar-fixed-top button, .navbar.navbar-inverse.navbar-fixed-top li {
+    .navbar.navbar-inverse.navbar-fixed-top a, .navbar.navbar-inverse.navbar-fixed-top button, .navbar.navbar-inverse.navbar-fixed-top li,#shoppingcart {
         color: #E4F5E4;
     }
 
 
-    .navbar.navbar-inverse.navbar-fixed-top :hover {
+    .navbar.navbar-inverse.navbar-fixed-top :hover, #shoppingcart .dropdown-toggle:hover {
         color: #46DE40;
     }
 

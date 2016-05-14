@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -13,48 +14,56 @@
     <div class="form-horizontal">
 
         <h2>Create Boeking</h2>
-        <hr/>
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
-            @Html.Label("Klant", htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.Label("Klant", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @ViewBag.klant.Email
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.datum, "Datum", htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.datum, "Datum", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.datum)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Club1, "Thuisploeg", htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Club1, "Thuisploeg", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Club1.naam)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Club, "Bezoekers", htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Club, "Bezoekers", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Club.naam)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Kies Vak", htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.Label("Kies Vak", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("vakId", (SelectList) ViewBag.VakNr, htmlAttributes: new {@class = "form-control"})
+                @Html.DropDownList("vakId", (SelectList)ViewBag.VakNr, htmlAttributes: new { @class = "form-control" })
+                
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default"/>
+
+                <a class="btn btn-default" id="linkButton" href="">
+                    
+                    <div class="glyphicon glyphicon-plus"></div>Add to cart
+                </a>
+
+              
+                <input type="submit" value="Checkout" class="btn btn-default"/>
             </div>
         </div>
 
@@ -72,7 +81,26 @@
         <p> @zitPlaats.id.ToString() </p>
     }
 }
+<script type="text/javascript">
+    document.ready = function () {
+        $(document).ready(function () {
+            var value = $('#vakId').val();
+            var url = '/ShoppingCart/AddToCart?wedstrijdId=@Model.id&vakId=' + value;
+            $('#linkButton').attr('href', url);
+            console.log('test');
+            $('#vakId').on('change', function () {
+                console.log("change");
+               value = $('#vakId').val();
+               console.log(value);
+               url = '/ShoppingCart/AddToCart?wedstrijdId=@Model.id&vakId=' + value;
+                console.log(url),
+               $('#linkButton').attr('href', url);
 
+            });
+        });
+    }
+</script>
+ 
 
 
 
