@@ -8,6 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("/Scripts/Cart.js")
 
 </head>
 <body>
@@ -28,9 +29,8 @@
                     <li>@Html.ActionLink("Stadion", "ListForm", "Stadion")</li>
                     
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                     @Html.Partial("Shoppingcart")
-                    <li>@Html.Partial("_LoginPartial")</li>
+                <ul class="nav navbar-nav navbar-right" id="shoppingcartcontainer">
+                    @Html.Partial("Shoppingcart")
                 </ul>
                 
             </div>

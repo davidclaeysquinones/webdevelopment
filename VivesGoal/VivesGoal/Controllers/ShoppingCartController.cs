@@ -66,6 +66,10 @@ namespace VivesGoal.Controllers
             }
 
             if (Session != null) Session["items"] = cart;
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Shoppingcart");
+            }
 
             return RedirectToAction("Index", "ShoppingCart");
         }
@@ -98,8 +102,14 @@ namespace VivesGoal.Controllers
 
             if (Session != null) Session["items"] = cart;
 
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Shoppingcart");
+            }
+
             return RedirectToAction("Index", "ShoppingCart");
         }
+
 
         public ActionResult ChangeAmount(int wedstrijdId, int vakId,int change)
         {
@@ -138,6 +148,10 @@ namespace VivesGoal.Controllers
             }
 
             if (Session != null) Session["items"] = cart;
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Shoppingcart");
+            }
             return RedirectToAction("Index", "ShoppingCart");
         }
 

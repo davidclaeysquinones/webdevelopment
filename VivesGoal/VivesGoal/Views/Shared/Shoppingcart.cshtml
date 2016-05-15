@@ -2,157 +2,134 @@
 @{
     Cart cart = (Cart)Session["items"];
 }
+    <li class="dropdown" id="shoppingcart" style="background-color: #0D590B;">
+        @if (cart != null)
+        {
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> @cart.Items.Count - Items<span class="caret"></span></a>
+        }
+        else
+        {
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 0 - Items<span class="caret"></span></a>
 
-<li class="dropdown" id="shoppingcart" style="background-color: #0D590B;">
-    @if (cart != null)
-    {
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> @cart.Items.Count - Items<span class="caret"></span></a>
-    }
-    else
-    {
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 0 - Items<span class="caret"></span></a>
+        }
 
-    }
-
-    <ul id="dropdown" class="dropdown-menu dropdown-cart" role="menu">
-        <div class="item-container">
-            @if (cart != null)
+        <ul id="dropdown" class="dropdown-menu dropdown-cart" role="menu">
+            <div class="item-container">
+                @if (cart != null)
             {
                 foreach (var item in cart.Items)
                 {
-                    <div class="item">
-                        <span class="item-left">
-                            <span class="item-info">
-                                <span>wedstrijd : @item.wedstrijd</span>
-                                <br />
-                                <span>vak : @item.vakNaam</span>
-                                <a href="/ShoppingCart/ChangeAmount?wedstrijdId=@item.wedstrijdId&vakId=@item.vakId&change=1" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-plus" style="color: black"></span></a>
-                                <a href="/ShoppingCart/ChangeAmount?wedstrijdId=@item.wedstrijdId&vakId=@item.vakId&change=-1" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-minus" style="color: black"></span></a>
-                                <br />
-                                <span>aantal : @item.aantal</span>
-                                <br />
-                                <span>prijs : @item.prijs €</span>
+                        <div class="item">
+                            <span class="item-left">
+                                <span class="item-info">
+                                    <span>wedstrijd : @item.wedstrijd</span>
+                                    <br />
+                                    <span>vak : @item.vakNaam</span>
+                                    <a href="" class="btn btn-default btn-xs pull-right glyphicon glyphicon-plus" data-wedstrijd="@item.wedstrijdId" data-vak="@item.vakId"></a>
+                                    <a href="" class="btn btn-default btn-xs pull-right glyphicon glyphicon-minus" data-wedstrijd="@item.wedstrijdId" data-vak="@item.vakId"></a>
+                                    <br />
+                                    <span>aantal : @item.aantal</span>
+                                    <br />
+                                    <span>prijs : @item.prijs €</span>
 
+                                </span>
                             </span>
-                        </span>
-                        <span class="item-right">
-                            @Html.ActionLink("x", "RemoveFromCart", "Shoppingcart", new {wedstrijdId = item.wedstrijdId, vakId = item.vakId}, new {@class = "btn btn-xs btn-danger pull-right"})
-                        </span>
-                    </div>
-                    <div class="sep"></div>
+                            <span class="item-right">
+                                <a href="" class="btn btn-xs btn-danger pull-right" data-wedstrijd="@item.wedstrijdId" data-vak="@item.vakId" >x</a>
+       
+                            </span>
+                        </div>
+                        <div class="sep"></div>
+                    }
+
                 }
-
-            }
-        </div>
-        <li>
+            </div>
+            <li>
 
 
-        </li>
-        <li class="divider"></li>
-        <li>@Html.ActionLink("View Cart", "Index", "ShoppingCart", null, new { @class = "text-center" })</li>
-    </ul>
-    <script type="text/javascript">
-        document.ready = function () {
-            $(document).ready(function () {
-                $('#dropdown').hover(function () {
-                    console.log("dropdown");
-                    $('#dropdown').css("color", "#E4F5E4");
-                    $('#dropdown').css("text-decoration-color", "#E4F5E4");
-                    $('.item-info').css("color", "#E4F5E4");
-                    $('.item-info').css("text-decoration-color", "#E4F5E4");
-                    $('.item-info span').css("color", "#E4F5E4");
-                    $('.item-info span').css("text-decoration-color", "#E4F5E4");
-                    $('.glyphicon.glyphicon-plus').css('color', '#000000');
-                    $('.glyphicon.glyphicon-minus').css('color', '#000000');
-                    $('.btn-danger').css('color', '#000000');
+            </li>
+            <li class="divider"></li>
+            <li>@Html.ActionLink("View Cart", "Index", "ShoppingCart", null, new { @class = "text-center" })</li>
+        </ul>
 
+<style>
+    ul.dropdown-cart {
+        min-width: 250px;
+    }
 
-                });
-
-
-            });
-        }
-    </script>
-
-
-
-    <style>
-        ul.dropdown-cart {
-            min-width: 250px;
+        ul.dropdown-cart li .item, ul.dropdown-cart li .item:hover, ul.dropdown-cart li .item:focus {
+            display: block;
+            padding: 3px 10px;
+            margin: 3px 0;
+            color: #E4F5E4;
         }
 
-            ul.dropdown-cart li .item, ul.dropdown-cart li .item:hover, ul.dropdown-cart li .item:focus {
-                display: block;
-                padding: 3px 10px;
-                margin: 3px 0;
-                color: #E4F5E4;
-            }
-
-            ul.dropdown-cart li .item-left {
-                float: left;
-            }
-
-        .item-container {
-            height: auto;
-            max-height: 15em;
-            overflow-x: hidden;
-        }
-
-        .item {
-            background-color: #5c7d59;
-            background-color: rgba(92, 125, 89,0.4)          
-        }
-
-        .sep {
-            height: 0.50em;
-            width: inherit;
-        }
-
-        ul.dropdown-cart li .item-left img,
-        ul.dropdown-cart li .item-left span.item-info {
+        ul.dropdown-cart li .item-left {
             float: left;
         }
 
-        ul.dropdown-cart li .item-left span.item-info {
-            margin-left: 10px;
-        }
+    .item-container {
+        height: auto;
+        max-height: 15em;
+        overflow-x: hidden;
+    }
 
-            ul.dropdown-cart li .item-left span.item-info span {
-                display: block;
-            }
+    .item {
+        background-color: #5c7d59;
+        background-color: rgba(92, 125, 89,0.4);
+    }
 
-        ul.dropdown-cart li .item-right {
-            float: right;
-        }
+    .sep {
+        height: 0.50em;
+        width: inherit;
+    }
 
-            ul.dropdown-cart li .item-right button {
-                margin-top: 14px;
-            }
+    ul.dropdown-cart li .item-left img,
+    ul.dropdown-cart li .item-left span.item-info {
+        float: left;
+    }
 
-        ul.dropdown-cart li .item:after {
-            visibility: hidden;
+    ul.dropdown-cart li .item-left span.item-info {
+        margin-left: 10px;
+    }
+
+        ul.dropdown-cart li .item-left span.item-info span {
             display: block;
-            font-size: 0;
-            content: " ";
-            clear: both;
-            height: 0;
         }
 
-#shoppingcart ::-webkit-scrollbar {
-    width: 12px;
-}
- 
-#shoppingcart ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px #57ea63;
-    -webkit-box-shadow: inset 0 0 6px rgba(87, 234, 99,0.3);
-    -ms-border-radius: 10px;
-    border-radius: 10px;
-}
+    ul.dropdown-cart li .item-right {
+        float: right;
+    }
 
-#shoppingcart ::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 6px #a0f3a7;
-            -webkit-box-shadow: inset 0 0 6px rgba(160,243,167,1);
+        ul.dropdown-cart li .item-right button {
+            margin-top: 14px;
         }
-    </style>
+
+    ul.dropdown-cart li .item:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+
+    #shoppingcart ::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    #shoppingcart ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px #57ea63;
+        -webkit-box-shadow: inset 0 0 6px rgba(87, 234, 99,0.3);
+        -ms-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    #shoppingcart ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px #a0f3a7;
+        -webkit-box-shadow: inset 0 0 6px rgba(160,243,167,1);
+    }
+</style>
+
 
