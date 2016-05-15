@@ -70,40 +70,100 @@ namespace VivesGoal.Controllers
             klantService = new KlantService();
             ViewBag.klant = klantService.Get(userId);
 
-            ZitplaatsService zitplaatsService = new ZitplaatsService();
+            zitplaatsService = new ZitplaatsService();
             ZitPlaats zitPlaats = zitplaatsService.GetAvailable(wedstrijdId, vakId);
 
             wedstrijdService = new WedstrijdService();
             Wedstrijd wedstrijd = wedstrijdService.GetWedstrijd(Convert.ToInt32(wedstrijdId));
 
-         
 
-            if (wedstrijd.datum <= DateTime.Now.AddDays(30))
+            if (zitPlaats != null)
             {
-                Boeking boeking = new Boeking();
-                boeking.Wedstrijd = wedstrijdId;
-                boeking.zitplaats = zitPlaats.id;
-                boeking.klant = userId;
-                
-                boekingService = new BoekingService();
+                if (wedstrijd.datum <= DateTime.Now.AddDays(30))
+                {
+                    Boeking boeking = new Boeking();
+                    boeking.Wedstrijd = wedstrijdId;
+                    boeking.zitplaats = zitPlaats.id;
+                    boeking.klant = userId;
 
-                //try
-                //{
-                    boekingService.Add(boeking);
-                //}
-                //catch (Exception )
-                //{
+                    boekingService = new BoekingService();
 
-                //    return new HttpStatusCodeResult(HttpStatusCode.Conflict);
-                //}
-                    
+                    try
+                    {
+                        boekingService.Add(boeking);
+                    }
+                    catch (Exception)
+                    {
+
+                        return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+                    }
+
                 }
-               
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
+                }
+            }
             else
             {
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
             }
 
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult CheckoutCart()
+        {
+            Cart cart;
+            try
+            {
+                cart = (Cart) Session["items"];
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (cart != null)
+            {
+                wedstrijdService = new WedstrijdService();
+                zitplaatsService = new ZitplaatsService();
+                var userId = User.Identity.GetUserId();
+                foreach (var item in cart.Items)
+                {
+                    for (int i = 0; i < item.aantal; i++)
+                    {
+                        Wedstrijd wedstrijd = wedstrijdService.GetWedstrijd(item.wedstrijdId);
+                        if (wedstrijd.datum <= DateTime.Now.AddDays(30))
+                        {
+                            Boeking boeking = new Boeking();
+                            boeking.Wedstrijd = item.wedstrijdId;
+                            ZitPlaats zitPlaats = zitplaatsService.GetAvailable(item.wedstrijdId, item.vakId);
+                            if (zitPlaats != null)
+                            {
+                                boeking.zitplaats = zitPlaats.id;
+                                boeking.klant = userId;
+
+                                boekingService = new BoekingService();
+
+                                try
+                                {
+                                    boekingService.Add(boeking);
+                                    Session["items"] = null;
+                                }
+                                catch (Exception)
+                                {
+
+                                    return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+                                }
+                            }
+
+                        }
+                    } 
+                        
+                }
+            }
             return RedirectToAction("Index", "Home");
         }
 
