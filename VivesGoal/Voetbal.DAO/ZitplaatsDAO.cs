@@ -25,9 +25,9 @@ namespace Voetbal.DAO
                 var exceptionList = db.Boeking.Where(b => b.ZitPlaats1.vak_id == vakId && b.Wedstrijd == wedstijdId).Select(b =>b.ZitPlaats1.id).ToList();
 
                 var wedstrijd = db.Wedstrijd.Find(wedstijdId);
-                var mogelijk = db.ZitPlaats.Where(z => z.Stadion1.id ==wedstrijd.Club1.Stadion.id).Select(z => z.id).ToList();
+                var mogelijk = db.ZitPlaats.Where(z => z.Stadion1.id ==wedstrijd.Club1.Stadion.id && z.vak_id==vakId).Select(z => z.id).ToList();
               
-                return db.ZitPlaats.FirstOrDefault(z => !exceptionList.Contains(z.id) && mogelijk.Contains(z.id) && z.Vak.id==vakId);
+                return db.ZitPlaats.FirstOrDefault(z => !exceptionList.Contains(z.id) && mogelijk.Contains(z.id) );
             }
         }
     }

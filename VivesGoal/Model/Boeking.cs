@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
@@ -16,11 +17,12 @@ namespace Model
     
     public partial class Boeking
     {
+
         public string klant { get; set; }
+
         public int zitplaats { get; set; }
+
         public int Wedstrijd { get; set; }
-        
-        public int id { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Wedstrijd Wedstrijd1 { get; set; }

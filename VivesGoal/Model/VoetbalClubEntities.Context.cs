@@ -31,11 +31,11 @@ namespace Model
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Boeking> Boeking { get; set; }
         public virtual DbSet<Club> Club { get; set; }
         public virtual DbSet<Stadion> Stadion { get; set; }
         public virtual DbSet<Vak> Vak { get; set; }
         public virtual DbSet<Wedstrijd> Wedstrijd { get; set; }
         public virtual DbSet<ZitPlaats> ZitPlaats { get; set; }
+        public virtual DbSet<Boeking> Boeking { get; set; }
     }
 }

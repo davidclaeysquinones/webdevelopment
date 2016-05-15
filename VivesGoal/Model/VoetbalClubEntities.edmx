@@ -76,14 +76,17 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'VoetbalClub.dbo.Boeking' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Boeking">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="klant" />
+            <PropertyRef Name="zitplaats" />
+            <PropertyRef Name="Wedstrijd" />
           </Key>
           <Property Name="klant" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="zitplaats" Type="int" Nullable="false" />
           <Property Name="Wedstrijd" Type="int" Nullable="false" />
-          <Property Name="id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Club">
           <Key>
@@ -324,12 +327,14 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Boeking" EntityType="Self.Boeking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stadion" EntityType="Self.Stadion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vak" EntityType="Self.Vak" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wedstrijd" EntityType="Self.Wedstrijd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZitPlaats" EntityType="Self.ZitPlaats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boeking" EntityType="Self.Boeking" store:Type="Tables" Schema="dbo">
+   
+          </EntitySet>
           <AssociationSet Name="Abonnement heeft als club" Association="Self.Abonnement heeft als club">
             <End Role="Club" EntitySet="Club" />
             <End Role="Abonnement" EntitySet="Abonnement" />
@@ -470,18 +475,6 @@
           <NavigationProperty Name="Boeking" Relationship="Self.klant_maakt_boeking" FromRole="AspNetUsers" ToRole="Boeking" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="Boeking">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="klant" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="zitplaats" Type="Int32" Nullable="false" />
-          <Property Name="Wedstrijd" Type="Int32" Nullable="false" />
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.klant_maakt_boeking" FromRole="Boeking" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Wedstrijd1" Relationship="Self.Boeking_behoort_tot_wedstrijd" FromRole="Boeking" ToRole="Wedstrijd" />
-          <NavigationProperty Name="ZitPlaats1" Relationship="Self.boeking_heeft_als_zitplaats" FromRole="Boeking" ToRole="ZitPlaats" />
-        </EntityType>
         <EntityType Name="Club">
           <Key>
             <PropertyRef Name="id" />
@@ -522,9 +515,9 @@
           <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="thuisploeg" Type="Int32" Nullable="false" />
           <Property Name="bezoekers" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Boeking" Relationship="Self.Boeking_behoort_tot_wedstrijd" FromRole="Wedstrijd" ToRole="Boeking" />
           <NavigationProperty Name="Club" Relationship="Self.bezoekers" FromRole="Wedstrijd" ToRole="Club" />
           <NavigationProperty Name="Club1" Relationship="Self.thuisploeg" FromRole="Wedstrijd" ToRole="Club" />
+          <NavigationProperty Name="Boeking" Relationship="Self.Boeking_behoort_tot_wedstrijd" FromRole="Wedstrijd" ToRole="Boeking" />
         </EntityType>
         <EntityType Name="ZitPlaats">
           <Key>
@@ -535,9 +528,22 @@
           <Property Name="stadion" Type="Int32" Nullable="false" />
           <Property Name="bezet" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Abonnement" Relationship="Self.Abonnement_heeft_als_zitplaats" FromRole="ZitPlaats" ToRole="Abonnement" />
-          <NavigationProperty Name="Boeking" Relationship="Self.boeking_heeft_als_zitplaats" FromRole="ZitPlaats" ToRole="Boeking" />
           <NavigationProperty Name="Stadion1" Relationship="Self.FKZitPlaats951413" FromRole="ZitPlaats" ToRole="Stadion" />
           <NavigationProperty Name="Vak" Relationship="Self.vak_behoort_tot_zitplaats" FromRole="ZitPlaats" ToRole="Vak" />
+          <NavigationProperty Name="Boeking" Relationship="Self.boeking_heeft_als_zitplaats" FromRole="ZitPlaats" ToRole="Boeking" />
+        </EntityType>
+        <EntityType Name="Boeking">
+          <Key>
+            <PropertyRef Name="klant" />
+            <PropertyRef Name="zitplaats" />
+            <PropertyRef Name="Wedstrijd" />
+          </Key>
+          <Property Name="klant" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zitplaats" Type="Int32" Nullable="false" />
+          <Property Name="Wedstrijd" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.klant_maakt_boeking" FromRole="Boeking" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Wedstrijd1" Relationship="Self.Boeking_behoort_tot_wedstrijd" FromRole="Boeking" ToRole="Wedstrijd" />
+          <NavigationProperty Name="ZitPlaats1" Relationship="Self.boeking_heeft_als_zitplaats" FromRole="Boeking" ToRole="ZitPlaats" />
         </EntityType>
         <Association Name="Abonnement_heeft_als_club">
           <End Role="Club" Type="Self.Club" Multiplicity="1" />
@@ -615,30 +621,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Boeking_behoort_tot_wedstrijd">
-          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="1" />
-          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wedstrijd">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Boeking">
-              <PropertyRef Name="Wedstrijd" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="boeking_heeft_als_zitplaats">
-          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="1" />
-          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ZitPlaats">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Boeking">
-              <PropertyRef Name="zitplaats" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="bezoekers">
           <End Role="Club" Type="Self.Club" Multiplicity="1" />
           <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="*" />
@@ -699,6 +681,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Boeking_behoort_tot_wedstrijd">
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="1" />
+          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wedstrijd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boeking">
+              <PropertyRef Name="Wedstrijd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="boeking_heeft_als_zitplaats">
+          <End Role="ZitPlaats" Type="Self.ZitPlaats" Multiplicity="1" />
+          <End Role="Boeking" Type="Self.Boeking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZitPlaats">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boeking">
+              <PropertyRef Name="zitplaats" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
@@ -710,12 +716,12 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="Boeking" EntityType="Self.Boeking" />
           <EntitySet Name="Club" EntityType="Self.Club" />
           <EntitySet Name="Stadion" EntityType="Self.Stadion" />
           <EntitySet Name="Vak" EntityType="Self.Vak" />
           <EntitySet Name="Wedstrijd" EntityType="Self.Wedstrijd" />
           <EntitySet Name="ZitPlaats" EntityType="Self.ZitPlaats" />
+          <EntitySet Name="Boeking" EntityType="Self.Boeking" />
           <AssociationSet Name="Abonnement_heeft_als_club" Association="Self.Abonnement_heeft_als_club">
             <End Role="Club" EntitySet="Club" />
             <End Role="Abonnement" EntitySet="Abonnement" />
@@ -740,14 +746,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Boeking" EntitySet="Boeking" />
           </AssociationSet>
-          <AssociationSet Name="Boeking_behoort_tot_wedstrijd" Association="Self.Boeking_behoort_tot_wedstrijd">
-            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
-            <End Role="Boeking" EntitySet="Boeking" />
-          </AssociationSet>
-          <AssociationSet Name="boeking_heeft_als_zitplaats" Association="Self.boeking_heeft_als_zitplaats">
-            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
-            <End Role="Boeking" EntitySet="Boeking" />
-          </AssociationSet>
           <AssociationSet Name="bezoekers" Association="Self.bezoekers">
             <End Role="Club" EntitySet="Club" />
             <End Role="Wedstrijd" EntitySet="Wedstrijd" />
@@ -767,6 +765,14 @@
           <AssociationSet Name="vak_behoort_tot_zitplaats" Association="Self.vak_behoort_tot_zitplaats">
             <End Role="Vak" EntitySet="Vak" />
             <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+          </AssociationSet>
+          <AssociationSet Name="Boeking_behoort_tot_wedstrijd" Association="Self.Boeking_behoort_tot_wedstrijd">
+            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
+            <End Role="Boeking" EntitySet="Boeking" />
+          </AssociationSet>
+          <AssociationSet Name="boeking_heeft_als_zitplaats" Association="Self.boeking_heeft_als_zitplaats">
+            <End Role="ZitPlaats" EntitySet="ZitPlaats" />
+            <End Role="Boeking" EntitySet="Boeking" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -843,16 +849,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Boeking">
-            <EntityTypeMapping TypeName="VoetbalClubModel.Boeking">
-              <MappingFragment StoreEntitySet="Boeking">
-                <ScalarProperty Name="klant" ColumnName="klant" />
-                <ScalarProperty Name="zitplaats" ColumnName="zitplaats" />
-                <ScalarProperty Name="Wedstrijd" ColumnName="Wedstrijd" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Club">
             <EntityTypeMapping TypeName="VoetbalClubModel.Club">
               <MappingFragment StoreEntitySet="Club">
@@ -898,6 +894,15 @@
                 <ScalarProperty Name="vak_id" ColumnName="vak id" />
                 <ScalarProperty Name="stadion" ColumnName="stadion" />
                 <ScalarProperty Name="bezet" ColumnName="bezet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boeking">
+            <EntityTypeMapping TypeName="VoetbalClubModel.Boeking">
+              <MappingFragment StoreEntitySet="Boeking">
+                <ScalarProperty Name="klant" ColumnName="klant" />
+                <ScalarProperty Name="zitplaats" ColumnName="zitplaats" />
+                <ScalarProperty Name="Wedstrijd" ColumnName="Wedstrijd" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

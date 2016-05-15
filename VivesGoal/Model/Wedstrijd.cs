@@ -28,9 +28,9 @@ namespace Model
         public int thuisploeg { get; set; }
         public int bezoekers { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Boeking> Boeking { get; set; }
         public virtual Club Club { get; set; }
         public virtual Club Club1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Boeking> Boeking { get; set; }
     }
 }
