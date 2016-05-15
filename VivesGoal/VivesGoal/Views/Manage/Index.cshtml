@@ -65,7 +65,10 @@
     {
             <script type="text/javascript">
             window.onload = function() {
-                $(document).ready(function() {
+                $(document).ready(function () {
+
+                    $.fn.dataTable.moment('DD/MM/YYYY');
+
                     $('#dataTable').DataTable({
                         language: {
                             "sProcessing": "Bezig...",

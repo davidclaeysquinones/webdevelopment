@@ -80,7 +80,7 @@ namespace VivesGoal.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
             }
 
-        
+            clubService = new ClubService();
             List<Wedstrijd> wedstrijden = new List<Wedstrijd>() ;
             if (id == -1)
             {

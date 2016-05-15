@@ -146,8 +146,9 @@
                             "sNext": "Volgende pagina",
                             "sPrevious": "Vorige pagina"
                         }
-  
-                    }
+
+                    },
+                    "columns": [null, null, null, { "orderable": false }]
                 });
             });
 
@@ -172,6 +173,7 @@
             <th>
                 Bezoekers
             </th>
+            <th></th>
     
         </tr>
     </thead>
@@ -183,12 +185,6 @@
 
                 <td>
                     @Html.DisplayFor(modelItem => item.datum)
-                    <br/>
-                    @if (item.datum <= DateTime.Now.AddDays(30))
-                    {
-                        @Html.ActionLink("Ticket(s) kopen", "Create", "Ticket", new { wedstrijdId = item.id }, null)
-                    }
-    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Club1.naam)
@@ -204,7 +200,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Club.naam)
-                    <img src="~/Content/Images/@item.Club.logo" style="width: auto; height: auto;max-width: 50px; max-height: 50px;padding: 0px 10px 0px 0px;" id="@item.id-@item.Club.naam" />
+                    <img src="~/Content/Images/@item.Club.logo" style="width: auto; height: auto; max-width: 50px; max-height: 50px; padding: 0px 10px 0px 0px;" id="@item.id-@item.Club.naam"/>
                     @*<div style="width: auto; height: auto;max-width: 50px; max-height: 50px" id="@item.id-@item.Club.naam"></div>
                     <script type="text/javascript">
                         window.onload=function() {
@@ -212,6 +208,12 @@
 
                         }
                     </script>*@
+                </td>
+                <td>
+                    @if (item.datum <= DateTime.Now.AddDays(30))
+                    {
+                        @Html.ActionLink("Ticket(s) kopen", "Create", "Ticket", new { wedstrijdId = item.id }, null)
+                    }
                 </td>
 
             </tr>
