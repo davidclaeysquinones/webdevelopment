@@ -81,6 +81,7 @@ namespace VivesGoal.Controllers
             }
 
             clubService = new ClubService();
+            wedstrijdService = new WedstrijdService();
             List<Wedstrijd> wedstrijden = new List<Wedstrijd>() ;
             if (id == -1)
             {
