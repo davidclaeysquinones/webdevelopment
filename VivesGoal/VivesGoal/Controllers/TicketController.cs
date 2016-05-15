@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.EnterpriseServices.Internal;
 using System.Linq;
 using System.Net;
+using System.Net.Configuration;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Model;
@@ -19,6 +25,7 @@ namespace VivesGoal.Controllers
         private ZitplaatsService zitplaatsService;
         private VakService vakService;
         private KlantService klantService;
+        private UserService userService;
 
 
         // GET: Ticket/Create
@@ -60,7 +67,7 @@ namespace VivesGoal.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(int wedstrijdId, int vakId)
+        public async Task<ActionResult> Create(int wedstrijdId, int vakId)
         {
 
             vakService = new VakService();
@@ -97,13 +104,32 @@ namespace VivesGoal.Controllers
 
                         return new HttpStatusCodeResult(HttpStatusCode.Conflict);
                     }
+                    userService = new UserService();
+                    AspNetUsers user = userService.Get(userId);
+
+
+                    var body = "<p>{0}</p>";
+                    var message = new MailMessage();
+                   // var section = ConfigurationManager.GetSection("system.net/mailSettings/smtp") as SmtpSection;
+                    var textmessage = "Beste klant,<br><br>Bedankt voor de aankoop op onze site.<br><br>U heeft het volgende ticket aangekocht : <br>een ticket voor de wedstrijd "+wedstrijd.Club1.naam+"-"+wedstrijd.Club.naam+" op "+wedstrijd.datum.Day+"/"+wedstrijd.datum.Month+"/"+wedstrijd.datum.Year+" voor de prijs van "+zitPlaats.Vak.prijs+" euro.";
+                    message.To.Add(new MailAddress(user.Email)); //replace with valid value
+                    message.Subject = "Aankoopbevestiging";
+                    message.Body = string.Format(body,textmessage);
+                    message.IsBodyHtml = true;
+                    using (var smtp = new SmtpClient())
+                    {
+                        await smtp.SendMailAsync(message);
+
+                    }
 
                 }
                 else
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
                 }
+
             }
+                
             else
             {
                 return new HttpStatusCodeResult(HttpStatusCode.MethodNotAllowed);
@@ -112,7 +138,7 @@ namespace VivesGoal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult CheckoutCart()
+        public async Task<ActionResult> CheckoutCart()
         {
             Cart cart;
             try
@@ -127,6 +153,7 @@ namespace VivesGoal.Controllers
 
             if (cart != null)
             {
+                var ticket="";
                 wedstrijdService = new WedstrijdService();
                 zitplaatsService = new ZitplaatsService();
                 var userId = User.Identity.GetUserId();
@@ -149,8 +176,7 @@ namespace VivesGoal.Controllers
 
                                 try
                                 {
-                                    boekingService.Add(boeking);
-                                    Session["items"] = null;
+                                    boekingService.Add(boeking);                                    
                                 }
                                 catch (Exception)
                                 {
@@ -160,8 +186,35 @@ namespace VivesGoal.Controllers
                             }
 
                         }
-                    } 
-                        
+                    }
+                    wedstrijdService = new WedstrijdService();
+                    Wedstrijd huidig = wedstrijdService.Get(item.wedstrijdId);
+                    if (item.aantal ==1)
+                    {               
+                        ticket += "een ticket gekocht voor de wedstrijd " + item.wedstrijd + " op " +
+                            huidig.datum.Day + "/" + huidig.datum.Month + "/" + huidig.datum.Year+"<br>";
+                    }
+                    else
+                    {
+                        ticket+=item.aantal +" tickets gekocht voor de wedstrijd " + item.wedstrijd + " op " +
+                            huidig.datum.Day + "/" + huidig.datum.Month + "/" + huidig.datum.Year + "<br>";
+                    }  
+                }
+                Session["items"] = null;
+                var body = "<p>{0}</p>";
+                userService = new UserService();
+                AspNetUsers user = userService.Get(userId);
+                var message = new MailMessage();
+                // var section = ConfigurationManager.GetSection("system.net/mailSettings/smtp") as SmtpSection;
+                var textmessage = "Beste klant,<br><br>Bedankt voor de aankoop op onze site.<br><br>U heeft de volgende tickets aangekocht : <br>"+ticket;
+                message.To.Add(new MailAddress(user.Email)); //replace with valid value
+                message.Subject = "Aankoopbevestiging";
+                message.Body = string.Format(body, textmessage);
+                message.IsBodyHtml = true;
+                using (var smtp = new SmtpClient())
+                {
+                    await smtp.SendMailAsync(message);
+
                 }
             }
             return RedirectToAction("Index", "Home");
