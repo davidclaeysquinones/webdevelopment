@@ -13,49 +13,60 @@
 </p>
 <div id="update-message">
 </div>
-<table>
-    <tr>
-        <th>
-            Wedstrijd
-        </th>
-        <th>
-            Vak
-        </th>
-        <th>
-            Aantal
-        </th>
-        <th>Prijs</th>
-    </tr>
-    @{
-        int total = 0;
-        if (cart != null)
-        {
-            foreach (var item in cart.Items)
-            {
-                <tr>
-                    <td>
-                        @item.wedstrijd
-                    </td>
-                    <td>
-                        @item.vakNaam
-                    </td>
-                    <td>
-                        @item.aantal
-                    </td>
-                    <td>
-                        @item.prijs
-                    </td>
-                </tr>
-                { total += Convert.ToInt32(item.prijs) * item.aantal; };
-            }
-        }
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Wedstrijd
+            </th>
+            <th>
+                Vak
+            </th>
+            <th>
+                Aantal
+            </th>
+            <th>Prijs</th>
+        </tr>
+    </thead>
 
-    }
-   
-    <tr>
-        <td>
-            Total : @total
-        </td>
-     
-    </tr>
+    <tbody>
+        @{
+            int total = 0;
+            if (cart != null)
+            {
+                foreach (var item in cart.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.wedstrijd
+                        </td>
+                        <td>
+                            @item.vakNaam
+                        </td>
+                        <td>
+                            <a href="/ShoppingCart/ChangeAmount?wedstrijdId=@item.wedstrijdId&vakId=@item.vakId&change=-1" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-minus" style="color: black"></span></a>
+                            @item.aantal
+                            <a href="/ShoppingCart/ChangeAmount?wedstrijdId=@item.wedstrijdId&vakId=@item.vakId&change=1" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus" style="color: black"></span></a>
+                        </td>
+                        <td>
+                            @item.prijs
+                            @Html.ActionLink("x", "RemoveFromCart", "Shoppingcart", new { wedstrijdId = item.wedstrijdId, vakId = item.vakId }, new { @class = "btn btn-xs btn-danger pull-right" })
+
+
+                        </td>
+                     
+                    </tr>
+                    {
+                        total += Convert.ToInt32(item.prijs) * item.aantal;
+                    }
+                }
+            }
+
+        }
+    </tbody>
 </table>
+
+<p><b>Total : @total</b></p>
+
+            
+
