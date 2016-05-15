@@ -1,6 +1,6 @@
 ﻿@using Model
 @{
-    Cart cart = (Cart) Session["items"];
+    Cart cart = (Cart)Session["items"];
 }
 
 <li class="dropdown" id="shoppingcart" style="background-color: #0D590B;">
@@ -14,107 +14,145 @@
 
     }
 
-<ul id="dropdown" class="dropdown-menu dropdown-cart" role="menu">
-    @if (cart != null)
-    {
-        foreach (var item in cart.Items)
-        {
-            <span class="item">
-                <span class="item-left">
-                    <span class="item-info">
-                        <span>wedstrijd : @item.wedstrijd</span>
-                        <br />
-                        <span>vak : @item.vakNaam</span>
-                        <a href="/ShoppingCart/ChangeAmount?wedstrijdId=@item.wedstrijdId&vakId=@item.vakId&change=1" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-plus" style="color: black"></span></a>
-                        <a href="/ShoppingCart/ChangeAmount?wedstrijdId=@item.wedstrijdId&vakId=@item.vakId&change=-1" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-minus" style="color: black"></span></a>
-                        <br />
-                        <span>aantal : @item.aantal</span>
-                        <br />
-                        <span>prijs : @item.prijs €</span>
+    <ul id="dropdown" class="dropdown-menu dropdown-cart" role="menu">
+        <div class="item-container">
+            @if (cart != null)
+            {
+                foreach (var item in cart.Items)
+                {
+                    <div class="item">
+                        <span class="item-left">
+                            <span class="item-info">
+                                <span>wedstrijd : @item.wedstrijd</span>
+                                <br />
+                                <span>vak : @item.vakNaam</span>
+                                <a href="/ShoppingCart/ChangeAmount?wedstrijdId=@item.wedstrijdId&vakId=@item.vakId&change=1" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-plus" style="color: black"></span></a>
+                                <a href="/ShoppingCart/ChangeAmount?wedstrijdId=@item.wedstrijdId&vakId=@item.vakId&change=-1" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-minus" style="color: black"></span></a>
+                                <br />
+                                <span>aantal : @item.aantal</span>
+                                <br />
+                                <span>prijs : @item.prijs €</span>
 
-                    </span>
-                </span>
-                <span class="item-right">               
-                    @Html.ActionLink("x", "RemoveFromCart", "Shoppingcart", new { wedstrijdId = item.wedstrijdId, vakId = item.vakId }, new { @class = "btn btn-xs btn-danger pull-right" })
-            </span>
-        </span>
-        }
-    }
-    <li>
-       
-        
-    </li>
-    <li class="divider"></li>
-    <li>@Html.ActionLink("View Cart","Index","ShoppingCart",null, new { @class="text-center"})</li>
-</ul>
+                            </span>
+                        </span>
+                        <span class="item-right">
+                            @Html.ActionLink("x", "RemoveFromCart", "Shoppingcart", new {wedstrijdId = item.wedstrijdId, vakId = item.vakId}, new {@class = "btn btn-xs btn-danger pull-right"})
+                        </span>
+                    </div>
+                    <div class="sep"></div>
+                }
+
+            }
+        </div>
+        <li>
+
+
+        </li>
+        <li class="divider"></li>
+        <li>@Html.ActionLink("View Cart", "Index", "ShoppingCart", null, new { @class = "text-center" })</li>
+    </ul>
     <script type="text/javascript">
-    document.ready = function () {
-        $(document).ready(function () {
-            $('#dropdown').hover(function () {
-                console.log("dropdown");
-                $('#dropdown').css("color", "#E4F5E4");
-                $('#dropdown').css("text-decoration-color", "#E4F5E4");
-                $('.item-info').css("color", "#E4F5E4");
-                $('.item-info').css("text-decoration-color", "#E4F5E4");
-                $('.item-info span').css("color", "#E4F5E4");
-                $('.item-info span').css("text-decoration-color", "#E4F5E4");
-                $('.glyphicon.glyphicon-plus').css('color', '#000000');
-                $('.glyphicon.glyphicon-minus').css('color', '#000000');
-                $('.btn-danger').css('color', '#000000');
+        document.ready = function () {
+            $(document).ready(function () {
+                $('#dropdown').hover(function () {
+                    console.log("dropdown");
+                    $('#dropdown').css("color", "#E4F5E4");
+                    $('#dropdown').css("text-decoration-color", "#E4F5E4");
+                    $('.item-info').css("color", "#E4F5E4");
+                    $('.item-info').css("text-decoration-color", "#E4F5E4");
+                    $('.item-info span').css("color", "#E4F5E4");
+                    $('.item-info span').css("text-decoration-color", "#E4F5E4");
+                    $('.glyphicon.glyphicon-plus').css('color', '#000000');
+                    $('.glyphicon.glyphicon-minus').css('color', '#000000');
+                    $('.btn-danger').css('color', '#000000');
+
+
+                });
 
 
             });
-
-
-        });
-    }
+        }
     </script>
 
 
 
-<style>
-    ul.dropdown-cart{
-    min-width:250px;
+    <style>
+        ul.dropdown-cart {
+            min-width: 250px;
+        }
+
+            ul.dropdown-cart li .item, ul.dropdown-cart li .item:hover, ul.dropdown-cart li .item:focus {
+                display: block;
+                padding: 3px 10px;
+                margin: 3px 0;
+                color: #E4F5E4;
+            }
+
+            ul.dropdown-cart li .item-left {
+                float: left;
+            }
+
+        .item-container {
+            height: auto;
+            max-height: 15em;
+            overflow-x: hidden;
+        }
+
+        .item {
+            background-color: #5c7d59;
+            background-color: rgba(92, 125, 89,0.4)          
+        }
+
+        .sep {
+            height: 0.50em;
+            width: inherit;
+        }
+
+        ul.dropdown-cart li .item-left img,
+        ul.dropdown-cart li .item-left span.item-info {
+            float: left;
+        }
+
+        ul.dropdown-cart li .item-left span.item-info {
+            margin-left: 10px;
+        }
+
+            ul.dropdown-cart li .item-left span.item-info span {
+                display: block;
+            }
+
+        ul.dropdown-cart li .item-right {
+            float: right;
+        }
+
+            ul.dropdown-cart li .item-right button {
+                margin-top: 14px;
+            }
+
+        ul.dropdown-cart li .item:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+
+#shoppingcart ::-webkit-scrollbar {
+    width: 12px;
 }
-ul.dropdown-cart li .item, ul.dropdown-cart li .item:hover , ul.dropdown-cart li .item:focus{
-    display:block;
-    padding:3px 10px;
-    margin: 3px 0;
-    color: #E4F5E4
+ 
+#shoppingcart ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #57ea63;
+    -webkit-box-shadow: inset 0 0 6px rgba(87, 234, 99,0.3);
+    -ms-border-radius: 10px;
+    border-radius: 10px;
 }
 
-ul.dropdown-cart li .item-left{
-    float:left;
-}
-
-
-ul.dropdown-cart li .item-left img,
-ul.dropdown-cart li .item-left span.item-info{
-    float:left;
-}
-ul.dropdown-cart li .item-left span.item-info{
-    margin-left:10px;   
-}
-ul.dropdown-cart li .item-left span.item-info span{
-    display:block;
-}
-ul.dropdown-cart li .item-right{
-    float:right;
-}
-ul.dropdown-cart li .item-right button{
-    margin-top:14px;
-}
-
-ul.dropdown-cart li .item:after{
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-}
-
-
-
-</style>
+#shoppingcart ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px #a0f3a7;
+            -webkit-box-shadow: inset 0 0 6px rgba(160,243,167,1);
+        }
+    </style>
 
