@@ -20,5 +20,10 @@ namespace Voetbal.Services
         {
             return clubDAO.All();
         }
+
+        public Club Get(int id)
+        {
+            return clubDAO.Get(id);
+        }
     }
 }

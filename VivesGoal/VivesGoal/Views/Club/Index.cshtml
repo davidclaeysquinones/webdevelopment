@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Model.Club>
+
+@{
+    ViewBag.Title = "Clubs";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Club
+        </th>
+        <th>
+        </th>
+        <th>
+           Stadion
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.naam)
+        </td>
+        <td>
+            <img src="~/Content/Images/@item.logo" style="width: auto; height: auto;max-width: 50px; max-height: 50px;padding: 0px 10px 0px 0px;" />
+            
+        </td>
+        <td>
+            @Html.ActionLink(item.Stadion.naam, "ListForm", "Stadion", new {stadionId = @item.id}, null)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+
+        </td>
+    </tr>
+}
+
+</table>

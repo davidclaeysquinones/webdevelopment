@@ -24,22 +24,16 @@ namespace VivesGoal.Controllers
             return View();
         }
 
-        public ActionResult ListForm()
-        {
-            stadionService = new StadionService();
-            ViewBag.StadionId = new SelectList(stadionService.All(),"id","naam");
-
-            return View(stadionService.All());
-        }
-
-        [HttpPost] //lijst van stadion wordt naar deze methode teruggestuurd
+          //lijst van stadion wordt naar deze methode teruggestuurd
         public ActionResult ListForm(int ?stadionId)
         {
+            stadionService = new StadionService();
             if (stadionId == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.StadionId = new SelectList(stadionService.All(), "id", "naam");
+
+                return View(stadionService.All());
             }
-            stadionService = new StadionService();
             ViewBag.StadionId = new SelectList(stadionService.All(), "id", "naam");
 
             var stadion = stadionService.Get(Convert.ToInt32(stadionId));

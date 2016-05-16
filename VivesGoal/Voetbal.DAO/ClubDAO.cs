@@ -14,7 +14,15 @@ namespace Voetbal.DAO
         {
             using (var db = new VoetbalClubEntities())
             {
-                return db.Club.ToList();
+                return db.Club.Include( c => c.Stadion).ToList();
+            }
+        }
+
+        public Club Get(int id)
+        {
+            using (var db = new VoetbalClubEntities())
+            {
+                return db.Club.Include(c => c.Stadion).FirstOrDefault( c => c.id==id);
             }
         }
     }

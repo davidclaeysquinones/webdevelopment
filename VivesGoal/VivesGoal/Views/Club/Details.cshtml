@@ -1,0 +1,35 @@
+﻿@using Model
+@model Model.Club
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Club</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Club
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.naam)
+        </dd>
+        <dt>
+            Stadion
+        </dt>
+       
+        <dd>
+            @Html.ActionLink(Model.Stadion.naam, "Listform", "Stadion", new {stadionId = Model.stadion_id}, null)
+        </dd>
+
+    </dl>
+
+    <img class="thumbnail" src="~/Content/Images/@Model.logo" style=" text-align:center;width: auto; height: auto;max-width: 200px; max-height: 200px; padding: 0px 10px 0px 0px;"/>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

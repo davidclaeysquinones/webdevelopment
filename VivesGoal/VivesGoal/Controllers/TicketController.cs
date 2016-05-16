@@ -17,6 +17,7 @@ using Voetbal.Services;
 
 namespace VivesGoal.Controllers
 {
+
     [Authorize]
     public class TicketController : Controller
     {
@@ -64,7 +65,6 @@ namespace VivesGoal.Controllers
             }
 
         }
-
 
         [HttpPost]
         public async Task<ActionResult> Create(int wedstrijdId, int vakId)
@@ -138,6 +138,7 @@ namespace VivesGoal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+      
         public async Task<ActionResult> CheckoutCart()
         {
             Cart cart;
