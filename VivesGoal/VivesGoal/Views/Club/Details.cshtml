@@ -28,7 +28,7 @@
 
     </dl>
 
-    <img class="thumbnail" src="~/Content/Images/@Model.logo" style=" text-align:center;width: auto; height: auto;max-width: 200px; max-height: 200px; padding: 0px 10px 0px 0px;"/>
+    <img class="thumbnail" src="@Url.Content("~/Content/Images/"+@Model.logo)" style=" text-align:center;width: auto; height: auto;max-width: 200px; max-height: 200px; padding: 0px 10px 0px 0px;"/>
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index")

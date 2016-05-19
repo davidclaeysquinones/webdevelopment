@@ -21,7 +21,8 @@ namespace VivesGoal.Controllers
         // GET: Stadion
         public ActionResult Index()
         {
-            return View();
+            stadionService = new StadionService();
+            return View(stadionService.All());
         }
 
           //lijst van stadion wordt naar deze methode teruggestuurd

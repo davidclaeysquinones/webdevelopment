@@ -79,7 +79,7 @@ namespace VivesGoal.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
-
+ 
             IEnumerable<Boeking> boekingen = boekingService.BoekingenKlant(userId);
             ViewBag.Boekingen = boekingen;
             return View(model);

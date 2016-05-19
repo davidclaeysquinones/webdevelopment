@@ -305,9 +305,14 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Images\aa_gent.jpg" />
+    <Content Include="Content\Images\anderlecht.png" />
     <Content Include="Content\Images\background.png" />
+    <Content Include="Content\Images\club_brugge.jpg" />
     <Content Include="Content\Images\Foto1.jpg" />
     <Content Include="Content\Images\jquery-ui.min.js" />
+    <Content Include="Content\Images\racing_genk.jpg" />
+    <Content Include="Content\Images\standard_de_liege.png" />
     <Content Include="Content\Images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\Images\ui-bg_glass_65_ffffff_1x400.png" />
     <Content Include="Content\Images\ui-bg_glass_75_dadada_1x400.png" />
@@ -329,6 +334,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />

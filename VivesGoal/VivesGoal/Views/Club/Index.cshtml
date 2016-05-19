@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelItem => item.naam)
         </td>
         <td>
-            <img src="~/Content/Images/@item.logo" style="width: auto; height: auto;max-width: 50px; max-height: 50px;padding: 0px 10px 0px 0px;" />
+            <img src="@Url.Content("~/Content/Images/"+@item.logo)" style="width: auto; height: auto;max-width: 50px; max-height: 50px;padding: 0px 10px 0px 0px;" />
             
         </td>
         <td>

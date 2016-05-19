@@ -188,8 +188,8 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Club1.naam)
-                    <img src="~/Content/Images/@item.Club1.logo" style="width: auto; height: auto;max-width: 50px; max-height: 50px;padding: 0px 10px 0px 0px;" id="@item.id-@item.Club1.naam"/>
-
+                    <img src="@Url.Content("~/Content/Images/"+@item.Club1.logo)" style="width: auto; height: auto;max-width: 50px; max-height: 50px;padding: 0px 10px 0px 0px;" id="@item.id-@item.Club1.naam"/>
+              
                     @*<div style="width: auto; height: auto;max-width: 50px; max-height: 50px" id="@item.id-@item.Club1.naam"></div>
                     <script type="text/javascript">
                         window.onload = function () {
@@ -200,7 +200,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Club.naam)
-                    <img src="~/Content/Images/@item.Club.logo" style="width: auto; height: auto; max-width: 50px; max-height: 50px; padding: 0px 10px 0px 0px;" id="@item.id-@item.Club.naam"/>
+                    <img src="@Url.Content("~/Content/Images/"+@item.Club.logo)" style="width: auto; height: auto; max-width: 50px; max-height: 50px; padding: 0px 10px 0px 0px;" id="@item.id-@item.Club.naam"/>
                     @*<div style="width: auto; height: auto;max-width: 50px; max-height: 50px" id="@item.id-@item.Club.naam"></div>
                     <script type="text/javascript">
                         window.onload=function() {
