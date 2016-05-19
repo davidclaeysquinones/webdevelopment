@@ -5,16 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ListForm</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-   @Html.DropDownList("stadionId", (SelectList)ViewBag.StadionId, htmlAttributes: new { @class = "form-control" })
+<h2>Stadions</h2>
 
-    <input Type="submit" value="Toon Stadions" class="btn btn-default"/>
-
-
-}
 
 <table class="table">
     <tr>
