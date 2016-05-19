@@ -35,6 +35,7 @@ namespace VivesGoal.Controllers
 
                 return View(stadionService.All());
             }
+
             ViewBag.StadionId = new SelectList(stadionService.All(), "id", "naam");
 
             var stadion = stadionService.Get(Convert.ToInt32(stadionId));
